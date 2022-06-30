@@ -1,15 +1,20 @@
-import axios from "axios";
-import cookies from "js-cookie";
+import axios from 'axios';
+import HttpClient from '../network/axios';
+import { getAccessToken } from '../lib/cookie';
 
-class UserService {
+class UserService extends HttpClient {
+  constructor() {
+    super('/users');
+  }
+
   async me() {
-    const accessToken = cookies.get("accessToken");
+    const accessToken = getAccessToken();
     if (!accessToken) {
       return;
     }
 
     const { data } = await axios.get(
-      process.env.NEXT_PUBLIC_API_HOST + "/users/me",
+      process.env.NEXT_PUBLIC_API_HOST + '/users/me',
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -22,7 +27,7 @@ class UserService {
 
   async read(id: number) {
     const { data } = await axios.get(
-      process.env.NEXT_PUBLIC_API_HOST + "/users/" + id
+      process.env.NEXT_PUBLIC_API_HOST + '/users/' + id
     );
 
     return data;
