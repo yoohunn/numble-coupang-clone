@@ -1,5 +1,5 @@
 import { useRequest } from './useRequest';
-import { UserService } from '../services';
+import { UserService } from '../api/services';
 
 export const useMe = () =>
   useRequest('me', UserService.me, { refetchInterval: 500 });

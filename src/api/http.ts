@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { getRefreshToken } from '../lib/cookie';
+import { getRefreshToken } from './token';
 
 const url = process.env.NEXT_PUBLIC_API_HOST;
 

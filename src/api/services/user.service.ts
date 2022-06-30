@@ -1,6 +1,6 @@
 import axios from 'axios';
-import HttpClient from '../network/axios';
-import { getAccessToken } from '../lib/cookie';
+import HttpClient from '../http';
+import { getAccessToken } from '../token';
 
 class UserService extends HttpClient {
   constructor() {
