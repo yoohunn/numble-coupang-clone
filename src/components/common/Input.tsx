@@ -2,12 +2,12 @@ import { HTMLInputTypeAttribute, InputHTMLAttributes, forwardRef } from 'react';
 import styled from '@emotion/styled';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  type: HTMLInputTypeAttribute;
   placeholder: string;
   label?: string;
   message?: string;
 }
 
+//TODO: valid 할 때 focuse 가 사라지면 span 추가하기 valid
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ type, label, message, ...rest }, ref) => (
     <>
