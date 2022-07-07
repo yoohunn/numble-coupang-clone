@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Button from '../components/common/Button/Button';
+import Button from '../components/common/Button';
 
 export default {
   title: 'Button',
@@ -10,21 +10,26 @@ export default {
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Default = Template.bind({});
+Default.args = {
+  title: 'default',
+};
+
+export const Login = Template.bind({});
+Login.args = {
   title: '로그인',
   type: 'button',
   colored: true,
 };
 
-export const Submit = Template.bind({});
-Submit.args = {
+export const SignIn = Template.bind({});
+SignIn.args = {
   title: '회원가입',
   href: '/signin',
 };
 
-export const Link = Template.bind({});
-Link.args = {
+export const Agreement = Template.bind({});
+Agreement.args = {
   title: '동의하고 가입하기',
   type: 'submit',
   colored: true,
