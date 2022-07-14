@@ -1,6 +1,5 @@
-import { ChangeEvent, ComponentProps, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import {
   useForm,
   SubmitHandler,
@@ -150,10 +149,10 @@ export default function SignupPage() {
                   {...register(i.name)}
                   title={i.title}
                   description={i.description}
-                  required={i.required}
                   isChild={i.isChild}
-                  onChange={handleCheck}
+                  required={i.required}
                   checked={isCheck.includes(i.name)}
+                  onChange={handleCheck}
                 />
               </li>
             ))}
