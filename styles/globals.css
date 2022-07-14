@@ -22,3 +22,9 @@ li {
 input {
   border: 0;
 }
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: 0;
+}
