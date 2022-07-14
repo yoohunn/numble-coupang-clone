@@ -42,18 +42,18 @@ export default function LoginPage() {
     <AuthLayout title='로그인'>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
+          {...register('email', validation.email)}
+          icon='📧'
           type='email'
-          label='📧'
           placeholder='아이디(이메일)'
           message={errors.email?.message}
-          {...register('email', validation.email)}
         />
         <Input
+          {...register('password', validation.password)}
+          icon='🔒'
           type='password'
-          label='🔒'
           placeholder='비밀번호'
           message={errors.password?.message}
-          {...register('password', validation.password)}
         />
 
         <Utils>
@@ -66,7 +66,7 @@ export default function LoginPage() {
 
         <Button type='submit' title='로그인' colored />
         <hr />
-        <Button href='/auth/signup' title='회원가입' />
+        <Button to='/auth/signup' title='회원가입' />
       </Form>
     </AuthLayout>
   );
