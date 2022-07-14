@@ -1,21 +1,18 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
 import styled from '@emotion/styled';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface ICheckbox extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  description?: string;
-  bold?: boolean;
   isChild?: boolean;
+  bold?: boolean;
+  description?: {};
 }
 
-const Checkbox = forwardRef<HTMLInputElement, Props>(
-  (
-    { title, description, bold, required, onChange, isChild, ...props },
-    ref
-  ) => (
+const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
+  ({ title, description, bold, isChild, ...props }, ref) => (
     <Wrapper bold={bold} isChild={isChild}>
       <label>
-        <input type='checkbox' ref={ref} onChange={onChange} {...props} />
+        <input type='checkbox' ref={ref} {...props} />
         <span>{title}</span>
       </label>
       {description && <button>〉</button>}
@@ -44,10 +41,7 @@ const Wrapper = styled.div<{ bold?: boolean; isChild?: boolean }>`
   }
 
   button {
-    outline: none;
-    border: 0;
     background-color: transparent;
-    cursor: pointer;
     width: 20px;
     height: 20px;
     font-size: 18px;

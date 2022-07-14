@@ -3,16 +3,15 @@ import styled from '@emotion/styled';
 
 interface IIput extends InputHTMLAttributes<HTMLInputElement>, IMessage {
   icon?: string;
-  placeholder: string;
   isValid?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, IIput>(
-  ({ type, icon, message, isValid, validations, ...props }, ref) => (
+  ({ icon, isValid, message, validations, ...props }, ref) => (
     <Wrapper error={!!message}>
       <label>
         <span>{icon || '✉️'}</span>
-        <input type={type} ref={ref} {...props} />
+        <input ref={ref} {...props} />
         {isValid && <span className='valid-icon'>✓</span>}
       </label>
       <Messages message={message} validations={validations} />
