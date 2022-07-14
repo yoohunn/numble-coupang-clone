@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 
-type Props = {
+interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
-  onClick?: () => {};
   to?: string;
   colored?: boolean;
-  type?: 'button' | 'submit';
-};
+}
 
-const Button = ({ to, type, title, colored, onClick }: Props) => (
+const Button = ({ to, title, colored, ...props }: IButton) => (
   <Wrapper colored={colored}>
     {to ? (
       <Link href={to} passHref>
         <a>{title}</a>
       </Link>
     ) : (
-      <button type={type} onClick={onClick}>
-        {title}
-      </button>
+      <button {...props}>{title}</button>
     )}
   </Wrapper>
 );
