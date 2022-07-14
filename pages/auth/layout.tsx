@@ -26,6 +26,7 @@ const Box = styled.div`
   margin: auto;
   min-width: 290px;
   max-width: 460px;
+  margin-bottom: 60px;
 `;
 
 const Header = styled.header`
