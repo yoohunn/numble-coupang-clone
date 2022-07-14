@@ -4,27 +4,30 @@ import styled from '@emotion/styled';
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   description?: string;
-  subItem?: boolean;
   bold?: boolean;
+  isChild?: boolean;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, Props>(
-  ({ title, description, bold, required, subItem, ...rest }, ref) => (
-    <Box bold={bold} subItem={subItem}>
+  (
+    { title, description, bold, required, onChange, isChild, ...props },
+    ref
+  ) => (
+    <Wrapper bold={bold} isChild={isChild}>
       <label>
-        <input type='checkbox' {...rest} ref={ref} />
+        <input type='checkbox' ref={ref} onChange={onChange} {...props} />
         <span>{title}</span>
       </label>
       {description && <button>〉</button>}
-    </Box>
+    </Wrapper>
   )
 );
 
 export default Checkbox;
 
-const Box = styled.div<{ bold?: boolean; subItem?: boolean }>`
+const Wrapper = styled.div<{ bold?: boolean; isChild?: boolean }>`
   padding-bottom: 12px;
-  padding-left: ${({ subItem }) => (subItem ? '22px' : '0')};
+  padding-left: ${({ isChild }) => (isChild ? '22px' : '0')};
   width: 100%;
   display: flex;
   justify-content: space-between;
