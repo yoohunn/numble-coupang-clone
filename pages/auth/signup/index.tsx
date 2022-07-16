@@ -7,7 +7,7 @@ import {
   RegisterOptions,
 } from 'react-hook-form';
 
-import { SignupForm, checkFields, inputFields } from './fields';
+import { SignupForm, checkboxFields, inputFields } from './fields';
 import AuthLayout from '../layout';
 import Button from '../../../src/components/common/Button/Button';
 import Input from '../../../src/components/common/Input/Input';
@@ -22,6 +22,7 @@ export default function SignupPage() {
   } = useForm<SignupForm>({
     mode: 'onChange',
   });
+
   const password = watch('password');
 
   const validation: { [name in Path<SignupForm>]?: RegisterOptions } = {
@@ -98,8 +99,8 @@ export default function SignupPage() {
         </InputGroup>
         <Section>
           <h1>쿠팡 서비스약관에 동의해주세요 </h1>
-          <CheckboxGroup //
-            fields={checkFields}
+          <CheckboxGroup<SignupForm> //
+            fields={checkboxFields}
             register={register}
           />
         </Section>

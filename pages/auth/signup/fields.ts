@@ -1,15 +1,16 @@
 import { ComponentProps } from 'react';
+import { Path } from 'react-hook-form';
 
 import { SignupAgreements as CheckFields } from '../../../src/services/auth.service';
-import Checkbox from '../../../src/components/common/Checkbox/Checkbox';
 import Input from '../../../src/components/common/Input/Input';
+import Checkbox from '../../../src/components/common/Checkbox/Checkbox';
 
 export interface IInput extends ComponentProps<typeof Input> {
   name: keyof SignupForm;
 }
 
-export interface ICheck extends ComponentProps<typeof Checkbox> {
-  name: keyof SignupForm;
+export interface ICheck<TForm> extends ComponentProps<typeof Checkbox> {
+  name: Path<TForm>;
 }
 
 //
@@ -21,7 +22,6 @@ type InputFields = {
   passwordCheck: string;
   name: string;
   phoneNumber: string;
-  agreeAll: boolean;
 };
 
 export const inputFields: IInput[] = [
@@ -37,7 +37,7 @@ export const inputFields: IInput[] = [
   { icon: '📱', name: 'phoneNumber', type: 'text', placeholder: '휴대폰 번호' },
 ];
 
-export const checkFields: ICheck[] = [
+export const checkboxFields: ICheck<SignupForm>[] = [
   {
     name: 'terms_fourteen',
     title: '[필수] 만 14세 이상입니다',
@@ -104,6 +104,6 @@ export const checkParent: string[] = [
   'agree_to_collect_third_part_information',
 ];
 
-export const checkChild: string[] = checkFields
+export const checkChild: string[] = checkboxFields
   .filter((i) => !i.required)
   .map((i) => i.name);
