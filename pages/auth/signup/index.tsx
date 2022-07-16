@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { ChangeEvent, useState } from 'react';
 import {
   useForm,
   SubmitHandler,
@@ -8,27 +7,24 @@ import {
   RegisterOptions,
 } from 'react-hook-form';
 
-import { checks, FieldValue, inputs, checkParent, checkChild } from './fields';
+import { SignupForm, checkFields, inputFields } from './fields';
 import AuthLayout from '../layout';
 import Button from '../../../src/components/common/Button/Button';
-import Checkbox from '../../../src/components/common/Checkbox/Checkbox';
 import Input from '../../../src/components/common/Input/Input';
+import CheckboxGroup from '../../../src/components/common/CheckboxGroup/CheckboxGroup';
 
 export default function SignupPage() {
-  const [isCheckAll, setIsCheckAll] = useState(false);
-  const [isCheck, setIsCheck] = useState<string[]>([]);
-
   const {
     watch,
     register,
     handleSubmit,
     formState: { errors, touchedFields },
-  } = useForm<FieldValue>({
+  } = useForm<SignupForm>({
     mode: 'onChange',
   });
   const password = watch('password');
 
-  const validation: { [name in Path<FieldValue>]?: RegisterOptions } = {
+  const validation: { [name in Path<SignupForm>]?: RegisterOptions } = {
     email: {
       required: '아이디를 입력해주세요.',
       pattern: {
@@ -75,40 +71,12 @@ export default function SignupPage() {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data); //
 
-  const handleCheckAll = () => {
-    setIsCheckAll(!isCheckAll);
-    isCheckAll //
-      ? setIsCheck([])
-      : setIsCheck(checks.map((i) => i.name));
-  };
-
-  const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    const isCheckParent = checkParent.includes(name);
-
-    isCheckAll && setIsCheckAll(false);
-
-    if (isCheckParent) {
-      checked
-        ? setIsCheck([...isCheck, ...checkChild, name])
-        : setIsCheck(
-            isCheck.filter((n) => n !== name && !checkChild.includes(n))
-          );
-
-      return;
-    }
-
-    checked
-      ? setIsCheck([...isCheck, name])
-      : setIsCheck(isCheck.filter((n) => n !== name));
-  };
-
   return (
     <AuthLayout title='회원가입'>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputGroup>
           <h1>회원정보를 입력해주세요</h1>
-          {inputs.map((i, index) => (
+          {inputFields.map((i, index) => (
             <li key={index}>
               <Input
                 {...register(i.name, validation[i.name])}
@@ -128,36 +96,13 @@ export default function SignupPage() {
             </li>
           ))}
         </InputGroup>
-        <CheckGroup>
+        <Section>
           <h1>쿠팡 서비스약관에 동의해주세요 </h1>
-          <Checkbox
-            {...register('agreeAll')}
-            title='모두 동의합니다.'
-            onChange={handleCheckAll}
-            checked={isCheckAll}
-            bold
+          <CheckboxGroup //
+            fields={checkFields}
+            register={register}
           />
-          <p>
-            동의에는 필수 및 선택 목적(광고성 정보 수신 포함)에 대한 동의가
-            포함되어 있으며, 선택 목적의 동의를 거부하시는 경우에도 서비스
-            이용이 가능합니다.{' '}
-          </p>
-          <ul>
-            {checks.map((i, index) => (
-              <li key={index}>
-                <Checkbox
-                  {...register(i.name)}
-                  title={i.title}
-                  description={i.description}
-                  isChild={i.isChild}
-                  required={i.required}
-                  checked={isCheck.includes(i.name)}
-                  onChange={handleCheck}
-                />
-              </li>
-            ))}
-          </ul>
-        </CheckGroup>
+        </Section>
         <Button title='동의하고 가입하기' type='submit' colored />
       </form>
     </AuthLayout>
@@ -175,7 +120,7 @@ const InputGroup = styled.section`
   }
 `;
 
-const CheckGroup = styled.section`
+const Section = styled.section`
   margin-top: 20px;
   border-top: 1px solid #f1f4f6;
 
@@ -186,21 +131,5 @@ const CheckGroup = styled.section`
     font-weight: bold;
     line-height: 1.29;
     color: #111;
-  }
-
-  & > p {
-    margin: 0;
-    font-size: 12px;
-    line-height: 1.4;
-    color: #555;
-    margin-left: 26px;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  & > ul {
-    padding: 18px 16px;
-    border: 1px solid #ccc;
-    margin: 16px 0 32px 0;
   }
 `;
