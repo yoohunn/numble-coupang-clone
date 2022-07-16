@@ -1,27 +1,30 @@
 import { ComponentProps } from 'react';
 
-import { SignupAgreements } from '../../../src/services/auth.service';
+import { SignupAgreements as CheckFields } from '../../../src/services/auth.service';
 import Checkbox from '../../../src/components/common/Checkbox/Checkbox';
 import Input from '../../../src/components/common/Input/Input';
 
-export type FieldValue = {
+export interface IInput extends ComponentProps<typeof Input> {
+  name: keyof SignupForm;
+}
+
+export interface ICheck extends ComponentProps<typeof Checkbox> {
+  name: keyof SignupForm;
+}
+
+//
+export type SignupForm = InputFields & CheckFields;
+
+type InputFields = {
   email: string;
   password: string;
   passwordCheck: string;
   name: string;
   phoneNumber: string;
   agreeAll: boolean;
-} & SignupAgreements;
+};
 
-interface IInput extends ComponentProps<typeof Input> {
-  name: keyof FieldValue;
-}
-
-interface ICheck extends ComponentProps<typeof Checkbox> {
-  name: keyof FieldValue;
-}
-
-export const inputs: IInput[] = [
+export const inputFields: IInput[] = [
   { icon: '📧', name: 'email', type: 'email', placeholder: '아이디(이메일)' },
   { icon: '🔒', name: 'password', type: 'password', placeholder: '비밀번호' },
   {
@@ -34,7 +37,7 @@ export const inputs: IInput[] = [
   { icon: '📱', name: 'phoneNumber', type: 'text', placeholder: '휴대폰 번호' },
 ];
 
-export const checks: ICheck[] = [
+export const checkFields: ICheck[] = [
   {
     name: 'terms_fourteen',
     title: '[필수] 만 14세 이상입니다',
@@ -101,6 +104,6 @@ export const checkParent: string[] = [
   'agree_to_collect_third_part_information',
 ];
 
-export const checkChild: string[] = checks
+export const checkChild: string[] = checkFields
   .filter((i) => !i.required)
   .map((i) => i.name);
