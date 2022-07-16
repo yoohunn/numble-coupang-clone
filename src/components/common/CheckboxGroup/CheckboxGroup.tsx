@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from 'react';
 import styled from '@emotion/styled';
+import React, { ChangeEvent, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
 import Checkbox from '../Checkbox/Checkbox';
@@ -8,15 +8,14 @@ import {
   ICheck,
   checkParent,
   checkChild,
-  SignupForm,
 } from '../../../../pages/auth/signup/fields';
 
-interface ICheckboxGroup {
-  fields: ICheck[];
-  register: UseFormRegister<SignupForm>;
+interface IProps<T> {
+  fields: ICheck<T>[];
+  register: UseFormRegister<T>;
 }
 
-const CheckboxGroup = ({ fields, register }: ICheckboxGroup) => {
+const CheckboxGroup = <T extends unknown>({ fields, register }: IProps<T>) => {
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState<string[]>([]);
 
@@ -51,7 +50,6 @@ const CheckboxGroup = ({ fields, register }: ICheckboxGroup) => {
   return (
     <Wrapper>
       <Checkbox
-        {...register('agreeAll')}
         title='모두 동의합니다.'
         onChange={selectAll}
         checked={isCheckAll}
