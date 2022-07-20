@@ -1,26 +1,25 @@
 import styled from '@emotion/styled';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useMemo, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
 import Checkbox from '../Checkbox/Checkbox';
-
-import {
-  ICheck,
-  checkParent,
-  checkChild,
-} from '../../../../pages/auth/signup/fields';
+import { ICheck } from '../../../types/common.types';
 
 interface IProps<T> {
   fields: ICheck<T>[];
   register: UseFormRegister<T>;
+  linked?: { parent: string | string[]; child: string[] };
 }
 
-const CheckboxGroup = <T extends unknown>({ fields, register }: IProps<T>) => {
-  const [isCheckAll, setIsCheckAll] = useState(false);
+const CheckboxGroup = <T extends unknown>({
+  fields,
+  register,
+  linked,
+}: IProps<T>) => {
   const [isCheck, setIsCheck] = useState<string[]>([]);
+  const isCheckAll = useMemo(() => fields.length === isCheck.length, [isCheck]);
 
   const selectAll = () => {
-    setIsCheckAll(!isCheckAll);
     isCheckAll //
       ? setIsCheck([])
       : setIsCheck(fields.map((i) => i.name));
@@ -28,23 +27,26 @@ const CheckboxGroup = <T extends unknown>({ fields, register }: IProps<T>) => {
 
   const selectOne = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
-    const isCheckParent = checkParent.includes(name);
 
-    isCheckAll && setIsCheckAll(false);
-
-    if (isCheckParent) {
-      checked
-        ? setIsCheck([...isCheck, ...checkChild, name])
-        : setIsCheck(
-            isCheck.filter((n) => n !== name && !checkChild.includes(n))
-          );
-
-      return;
-    }
+    console.log(name);
 
     checked
       ? setIsCheck([...isCheck, name])
       : setIsCheck(isCheck.filter((n) => n !== name));
+
+    if (linked == null) return;
+
+    const isCheckParent = linked.parent.includes(name);
+
+    if (isCheckParent) {
+      checked
+        ? setIsCheck([...isCheck, ...linked.child, name])
+        : setIsCheck(
+            isCheck.filter((n) => n !== name && !linked.child.includes(n))
+          );
+
+      return;
+    }
   };
 
   return (

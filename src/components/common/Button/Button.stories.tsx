@@ -19,25 +19,25 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Standard = Template.bind({});
 Standard.args = {
-  title: 'Standard',
+  children: 'Standard',
 };
 
 export const NomalButton = Template.bind({});
 NomalButton.args = {
-  title: '로그인',
+  children: '로그인',
   type: 'button',
   colored: true,
 };
 
 export const Link = Template.bind({});
 Link.args = {
-  title: '회원가입',
+  children: '회원가입',
   to: '/signin',
 };
 
 export const Submit = Template.bind({});
 Submit.args = {
-  title: '동의하고 가입하기',
+  children: '동의하고 가입하기',
   type: 'submit',
   colored: true,
 };

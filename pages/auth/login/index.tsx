@@ -3,7 +3,7 @@ import { useForm, SubmitHandler, Path, RegisterOptions } from 'react-hook-form';
 
 import Button from '../../../src/components/common/Button/Button';
 import Input from '../../../src/components/common/Input/Input';
-import AuthLayout from '../layout';
+import AuthLayout from '../../../src/components/layout/auth.layout';
 
 type FormFields = {
   email: string;
@@ -64,9 +64,11 @@ export default function LoginPage() {
           <a href='/auth/find'>아이디(이메일)/비밀번호 찾기 〉 </a>
         </Utils>
 
-        <Button type='submit' title='로그인' colored />
+        <Button type='submit' colored>
+          로그인
+        </Button>
         <hr />
-        <Button to='/auth/signup' title='회원가입' />
+        <Button to='/auth/signup'>회원가입</Button>
       </Form>
     </AuthLayout>
   );

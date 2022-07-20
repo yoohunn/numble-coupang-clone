@@ -1,17 +1,13 @@
 import styled from '@emotion/styled';
-import {
-  useForm,
-  SubmitHandler,
-  FieldValues,
-  Path,
-  RegisterOptions,
-} from 'react-hook-form';
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 
-import { SignupForm, checkboxFields, inputFields } from './fields';
-import AuthLayout from '../layout';
+import useSignupFields from '../../../src/hooks/signup/useSignupFields';
+import AuthLayout from '../../../src/components/layout/auth.layout';
 import Button from '../../../src/components/common/Button/Button';
 import Input from '../../../src/components/common/Input/Input';
 import CheckboxGroup from '../../../src/components/common/CheckboxGroup/CheckboxGroup';
+import useSignupValidation from '../../../src/hooks/signup/useSignupValidation';
+import { SignupForm } from '../../../src/types/signup.types';
 
 export default function SignupPage() {
   const {
@@ -25,50 +21,11 @@ export default function SignupPage() {
 
   const password = watch('password');
 
-  const validation: { [name in Path<SignupForm>]?: RegisterOptions } = {
-    email: {
-      required: '아이디를 입력해주세요.',
-      pattern: {
-        value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
-        message: '아이디(이메일)는 이메일 형식으로 입력해주세요.',
-      },
-    },
-    password: {
-      required: '비밀번호를 입력해주세요.',
-      minLength: {
-        value: 8,
-        message: '비밀번호는 8자 이상이여야 합니다.',
-      },
-      pattern: {
-        value: /(?=.*\d)(?=.*[a-z]).{8,}/,
-        message: '영문/숫자/특수문자 2가지 이상 조합 (8~20자)',
-      },
-    },
-    passwordCheck: {
-      required: '확인을 위해 새 비밀번호를 다시 입력해주세요.',
-      validate: (value) =>
-        password === value || '비밀번호가 동일하지 않습니다.',
-    },
-    name: {
-      required: '이름을 정확히 입력하세요.',
-    },
-    phoneNumber: {
-      required: '휴대폰 번호를 정확하게 입력하세요.',
-    },
-  };
-
-  const pwValidations = [
-    {
-      type: 'pattern',
-      invalid: errors.password?.type === 'pattern',
-      message: '영문/숫자/특수문자 2가지 이상 조합 (8~20자)',
-    },
-    {
-      type: 'minLength',
-      invalid: errors.password?.type === 'minLength',
-      message: '비밀번호는 8자 이상이여야 합니다.',
-    },
-  ];
+  const { validationRules, validationStatus } = useSignupValidation(
+    errors,
+    password
+  );
+  const { inputFields, checkboxFields, checkboxLinked } = useSignupFields();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data); //
 
@@ -80,17 +37,17 @@ export default function SignupPage() {
           {inputFields.map((i, index) => (
             <li key={index}>
               <Input
-                {...register(i.name, validation[i.name])}
+                {...register(i.name, validationRules[i.name])}
                 icon={i.icon}
                 type={i.type}
                 placeholder={i.placeholder}
                 message={errors[i.name]?.message}
                 isValid={
-                  touchedFields[i.name] && !errors[i.name] ? true : false
+                  !errors[i.name] && touchedFields[i.name] ? true : false
                 }
                 validations={
-                  i.name === 'password' && touchedFields.password
-                    ? pwValidations
+                  i.name === 'password' && touchedFields[i.name]
+                    ? validationStatus[i.name]
                     : undefined
                 }
               />
@@ -102,9 +59,12 @@ export default function SignupPage() {
           <CheckboxGroup<SignupForm> //
             fields={checkboxFields}
             register={register}
+            linked={checkboxLinked}
           />
         </Section>
-        <Button title='동의하고 가입하기' type='submit' colored />
+        <Button type='submit' colored>
+          동의하고 가입하기
+        </Button>
       </form>
     </AuthLayout>
   );

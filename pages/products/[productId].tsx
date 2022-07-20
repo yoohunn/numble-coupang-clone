@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
-import Breadcrumble from './components/Breadcrumble';
-import Item from './components/Item';
-import OtherItems from './components/OtherItems';
-import Details from './components/Details';
-import useProductMock from './useProductMock';
+import Breadcrumble from '../../src/components/products/Breadcrumble';
+import Item from '../../src/components/products/Item';
+import OtherItems from '../../src/components/products/OtherItems';
+import Details from '../../src/components/products/Details';
+import useProductMock from '../../src/hooks/products/useProductMock';
 
 export default function VendoritemPage() {
   const router = useRouter();

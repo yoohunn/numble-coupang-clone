@@ -2,8 +2,9 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import CheckboxGroup from './CheckboxGroup';
-import { checkboxFields, SignupForm } from '../../../../pages/auth/signup/fields';
+import useSignupFields from '../../../hooks/signup/useSignupFields';
 import { useForm } from 'react-hook-form';
+import {SignupForm} from '../../../types/signup.types' 
 
 export default {
   title: 'CheckboxGroup',
@@ -26,15 +27,15 @@ export default {
 
 const Template: ComponentStory<typeof CheckboxGroup<SignupForm>> = (args) =>{
   const {register} = useForm<SignupForm>()
+  const {checkboxFields} = useSignupFields()
   
   return (
   <CheckboxGroup<SignupForm> {...args} 
   register={register}
+  fields ={ checkboxFields}
   />
 )};
 
 export const Standard = Template.bind({});
 Standard.args = {
-  fields:checkboxFields,
-
 };

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef, ComponentProps } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 import styled from '@emotion/styled';
 
 interface IIput extends InputHTMLAttributes<HTMLInputElement>, IMessage {
@@ -8,7 +8,7 @@ interface IIput extends InputHTMLAttributes<HTMLInputElement>, IMessage {
 
 const Input = forwardRef<HTMLInputElement, IIput>(
   ({ icon, isValid, message, validations, ...props }, ref) => (
-    <Wrapper error={!!message}>
+    <Wrapper error={message != null}>
       <label>
         <span>{icon || '✉️'}</span>
         <input ref={ref} {...props} />
@@ -74,15 +74,15 @@ const Wrapper = styled.label<{ error: boolean }>`
 
 interface IMessage {
   message?: string;
-  validations?: { type: string; invalid: boolean; message: string }[];
+  validations?: { isValid: boolean; message: string }[];
 }
 
 const Messages = ({ message, validations }: IMessage) => (
   <Box>
     {validations
-      ? validations.map(({ invalid, message }) => (
-          <ValidMessages invalid={invalid}>
-            <span>{invalid ? 'X' : '✓'}</span>
+      ? validations.map(({ isValid, message }) => (
+          <ValidMessages isValid={isValid}>
+            <span>{isValid ? 'X' : '✓'}</span>
             {message}
           </ValidMessages>
         ))
@@ -100,16 +100,16 @@ const Box = styled.div`
   }
 `;
 
-const ValidMessages = styled.span<{ invalid: boolean }>`
+const ValidMessages = styled.span<{ isValid: boolean }>`
   display: block;
   font-size: 12px;
   line-height: 18px;
-  color: ${(props) => (props.invalid ? '#e52528' : '#00891a')};
+  color: ${(props) => (props.isValid ? '#e52528' : '#00891a')};
 
   span {
     display: inline-block;
     width: 16px;
     height: 18px;
-    color: ${(props) => (props.invalid ? '#e52528' : '#00891a')};
+    color: ${(props) => (props.isValid ? '#e52528' : '#00891a')};
   }
 `;

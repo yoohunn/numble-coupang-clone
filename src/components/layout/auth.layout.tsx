@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import logo from '../../public/coupang-logo.png';
+import logo from '../../../public/coupang-logo.png';
 type Props = {
   title: string;
 };
