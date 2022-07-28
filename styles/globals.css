@@ -28,3 +28,10 @@ button {
   outline: none;
   border: 0;
 }
+
+p,
+h1,
+ul {
+  margin: 0px;
+  padding: 0px;
+}
