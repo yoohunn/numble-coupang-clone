@@ -16,7 +16,7 @@ interface IProps {}
 const ItemInfo = ({}: IProps) => {
   return (
     <Wrapper>
-      <div className='info-title'>
+      <div className='info-header'>
         <BlueLink to='/apple' title='Apple' />
         <Title title='Apple 아이폰 13 mini 자급제' />
         <StarRating />
@@ -71,7 +71,7 @@ const Wrapper = styled.div`
     border-bottom: 1px solid #eee;
   }
 
-  .info-title {
+  .info-header {
     padding: 0 0 10px;
     border-bottom: 1px solid #ccc;
   }

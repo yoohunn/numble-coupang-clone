@@ -1,25 +1,27 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
-interface IProps {}
+import { IDetailTab } from '../../../../types/product.interface';
 
-const Tabs = ({}: IProps) => {
+const Tabs = () => {
   const [activeId, setActiveId] = useState(0);
 
-  const tabs = [
-    { title: '상품상세' },
-    { title: '상품평' },
-    { title: '상품문의' },
-    { title: '배송/교환/반품 안내' },
+  const tabs: IDetailTab[] = [
+    { title: '상품상세', id: 'item-detail' },
+    { title: '상품평', id: 'item-review' },
+    { title: '상품문의', id: 'item-inquiry' },
+    { title: '배송/교환/반품 안내', id: 'item-announcement' },
   ];
+
   return (
     <Ul>
       {tabs.map((tab, index) => (
-        <li //
+        <li
           key={index}
           className={index === activeId ? 'active' : ''}
+          onClick={() => setActiveId(index)}
         >
-          <p>{tab.title}</p>
+          <a href={`#${tab.id}`}>{tab.title}</a>
         </li>
       ))}
     </Ul>
@@ -35,7 +37,7 @@ const Ul = styled.ul`
   font-size: 0;
   width: 100%;
 
-  & > li {
+  li {
     display: inline-block;
     padding: 15px 20px 14px;
     width: 25%;
@@ -45,6 +47,12 @@ const Ul = styled.ul`
     color: #555;
     font-weight: bold;
     font-size: 16px;
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   & > li.active {
