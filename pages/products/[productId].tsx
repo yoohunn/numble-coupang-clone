@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import useProductMock from '../../src/hooks/products/useProductMock';
-import Metatags from '../../src/components/products/MetaTage';
+import ProductMeta from '../../src/components/products/ProductMeta';
 import Breadcrumble from '../../src/components/products/sections/Breadcrumble/Breadcrumble';
 import Item from '../../src/components/products/sections/Item/Item';
 import OtherItems from '../../src/components/products/sections/OtherItems/OtherItems';
@@ -16,7 +16,7 @@ export default function VendoritemPage() {
 
   return (
     <Main>
-      <Metatags title={item?.itemName} url={item?.images[0].thumbnailImage} />
+      <ProductMeta itemName={item?.itemName} imageUrl={''} />
 
       <Breadcrumble breadcrumble={breadcrumble} />
       <Item item={item} />
