@@ -18,7 +18,7 @@ const Price = ({ price, orignPrice, discountRate, unit, size }: IProps) => {
     return (
       <Wrapper>
         {`${discountRate}%`}
-        <span>{`${orignPrice}원`}</span>
+        <span>{`${orignPrice?.toLocaleString()}원`}</span>
       </Wrapper>
     );
   };
@@ -27,7 +27,7 @@ const Price = ({ price, orignPrice, discountRate, unit, size }: IProps) => {
     <>
       <PriceDetail />
       <Strong size={size || 'md'}>
-        {price}
+        {price.toLocaleString()}
         <span>{unit}</span>
       </Strong>
     </>
