@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 
 import useProductMock from '../../src/hooks/products/useProductMock';
 import ProductMeta from '../../src/components/products/ProductMeta';
-import Breadcrumble from '../../src/components/products/sections/Breadcrumble/Breadcrumble';
-import Item from '../../src/components/products/sections/Item/Item';
-import OtherItems from '../../src/components/products/sections/OtherItems/OtherItems';
-import Details from '../../src/components/products/sections/Details/Details';
+import Breadcrumble from '../../src/components/products/productId/Breadcrumble/Breadcrumble';
+import Item from '../../src/components/products/productId/Item/Item';
+import OtherItems from '../../src/components/products/productId/OtherItems/OtherItems';
+import Details from '../../src/components/products/productId/Details/Details';
 
 export default function VendoritemPage() {
   const router = useRouter();
