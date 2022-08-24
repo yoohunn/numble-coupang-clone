@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 
-import SortTabs from '../../src/components/products/SortTabs';
+import SortTabs from '../../src/components/products/index/SortTabs';
 
 import { TSorter } from '../../src/types/products.types';
 import { useRouter } from 'next/router';

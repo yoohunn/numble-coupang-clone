@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ISorterState, TSorter } from '../../types/products.types';
+import { ISorterState, TSorter } from '../../../types/products.types';
 
 interface IProps extends ISorterState {
   id: TSorter;
