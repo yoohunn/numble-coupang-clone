@@ -11,3 +11,5 @@ export interface ISorterState {
   sorter: TSorter;
   setSorter: Dispatch<SetStateAction<TSorter>>;
 }
+
+export type TLimit = 12 | 24;

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import SortTab from './SortTab';
+import Options from './Options';
 import { ISorterState, TSorter } from '../../../types/products.types';
 
 interface IProps extends ISorterState {}
@@ -17,7 +18,7 @@ const SortTabs = ({ sorter, setSorter }: IProps) => {
   return (
     <Div>
       {sortTabs.map(({ id, name }) => (
-        <SortTab //
+        <SortTab
           key={id}
           id={id}
           name={name}
@@ -26,7 +27,8 @@ const SortTabs = ({ sorter, setSorter }: IProps) => {
         />
       ))}
 
-      {/* <Selection setLimit /> */}
+      <Options limit={24} />
+      {/* setLimit */}
     </Div>
   );
 };

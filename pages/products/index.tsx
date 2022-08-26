@@ -9,8 +9,8 @@ import { useRouter } from 'next/router';
 
 export default function ProductListPage() {
   const [sorter, setSorter] = useState<TSorter>('bestAsc');
-  // limit
-  // page
+  const [limit, setLimit] = useState<number>(12);
+  const [page, setPage] = useState<number>(1);
 
   const { data } = useQuery('products', () =>
     axios.get(
@@ -32,7 +32,12 @@ export default function ProductListPage() {
 
   return (
     <>
-      <SortTabs sorter={sorter} setSorter={setSorter} />
+      <SortTabs
+        sorter={sorter}
+        setSorter={setSorter}
+        // limit={limit}
+        // setLimit={setLimit}
+      />
       {/* 
       <ProductList products={data} />
       <Pagination page={page} setPage={setPage}/> */}
