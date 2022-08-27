@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 interface IProps {
   price: number;
-  orignPrice?: number;
+  orignPrice: number;
   discountRate?: number;
   unit: string;
   size?: Size;
@@ -14,10 +14,14 @@ type Size = 'sm' | 'md';
 const Price = ({ price, orignPrice, discountRate, unit, size }: IProps) => {
   const PriceDetail = () => {
     if (size === 'sm') return null;
+    if (price === orignPrice) return null;
+
+    const getDiscountRate = () =>
+      discountRate ?? Math.floor(((orignPrice - price) / price) * 100);
 
     return (
       <Wrapper>
-        {`${discountRate}%`}
+        {`${getDiscountRate()}%`}
         <span>{`${orignPrice?.toLocaleString()}원`}</span>
       </Wrapper>
     );

@@ -28,9 +28,11 @@ export interface IProductItem {
   originalPrice: number;
   rating: number;
   reviewCount: number;
-  rocketType: null | string;
+  rocketType: TRocket;
   salePrice: number;
   shippinFee: number;
   weight: number | null;
   wowPrice: number;
 }
+
+export type TRocket = 'ROCKET' | 'fresh' | null;

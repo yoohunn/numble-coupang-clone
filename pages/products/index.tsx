@@ -1,8 +1,10 @@
+import { Suspense } from 'react';
+import styled from '@emotion/styled';
+
 import SortTabs from '../../src/components/products/index/SortTabs';
 import useGetProducts from '../../src/hooks/products/useGetProducts';
 import useProductsPath from '../../src/hooks/products/useProductsPath';
 import ProductList from '../../src/components/products/index/ProductList';
-import { Suspense } from 'react';
 
 export default function ProductListPage() {
   const { query, sorter, setSorter } = useProductsPath();
@@ -10,7 +12,7 @@ export default function ProductListPage() {
   const { data } = useGetProducts(query);
 
   return (
-    <>
+    <Box>
       <SortTabs
         sorter={sorter}
         setSorter={setSorter}
@@ -21,6 +23,11 @@ export default function ProductListPage() {
         {data && <ProductList products={data} />}
       </Suspense>
       {/*    <Pagination page={page} setPage={setPage}/> */}
-    </>
+    </Box>
   );
 }
+
+const Box = styled.div`
+  width: 1080px;
+  margin: 40px auto;
+`;
