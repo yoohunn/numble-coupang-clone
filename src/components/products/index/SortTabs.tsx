@@ -2,11 +2,15 @@ import styled from '@emotion/styled';
 
 import SortTab from './SortTab';
 import Options from './Options';
-import { ISorterState, TSorter } from '../../../types/products.types';
+import type {
+  ILimitState,
+  ISorterState,
+  TSorter,
+} from '../../../types/products.types';
 
-interface IProps extends ISorterState {}
+interface IProps extends ISorterState, ILimitState {}
 
-const SortTabs = ({ sorter, setSorter }: IProps) => {
+const SortTabs = ({ sorter, setSorter, limit, setLimit }: IProps) => {
   const sortTabs: { id: TSorter; name: string }[] = [
     { id: 'bestAsc', name: '쿠팡 랭킹순' },
     { id: 'salePriceAsc', name: '낮은 가격순' },
@@ -27,7 +31,7 @@ const SortTabs = ({ sorter, setSorter }: IProps) => {
         />
       ))}
 
-      <Options limit={24} />
+      <Options limit={limit} setLimit={setLimit} />
       {/* setLimit */}
     </Div>
   );

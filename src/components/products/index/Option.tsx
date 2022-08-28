@@ -4,18 +4,18 @@ import { MouseEventHandler, ReactNode } from 'react';
 import { TLimit } from '../../../types/products.types';
 
 interface IProps {
-  limit: TLimit;
+  isActive: boolean;
   value: TLimit;
   onClick?: MouseEventHandler<HTMLElement>;
   icon?: ReactNode;
 }
 
-const Option = ({ limit, value, onClick, icon }: IProps) => {
+const Option = ({ value, isActive, onClick, icon }: IProps) => {
   return (
     <Li
       data-value={value}
       onClick={onClick}
-      className={limit === value ? 'active' : ''}
+      className={isActive ? 'active' : ''}
     >
       <span>{value}개씩 보기</span>
       {icon}
