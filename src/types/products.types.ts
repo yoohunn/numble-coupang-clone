@@ -14,6 +14,16 @@ export interface ISorterState {
 
 export type TLimit = 12 | 24;
 
+export interface ILimitState {
+  limit: TLimit;
+  setLimit: Dispatch<SetStateAction<TLimit>>;
+}
+
+export interface IPageState {
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+}
+
 export interface IProductItem {
   expectedDeliveryDate: Date;
   id: number;
