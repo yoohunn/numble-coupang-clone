@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import { TRocket } from '../../types/products.types';
+import type { TRocket } from '../../types/products.types';
 
 interface IProps {
   type: TRocket;
@@ -10,20 +9,27 @@ interface IProps {
 const RocketBage = ({ type }: IProps) => {
   if (type === null) return null;
 
-  const src =
-    type === 'fresh'
-      ? 'https://image7.coupangcdn.com/image/mobile_app/v3/brandsdp/loyalty/pc/rocket-fresh@2x.png'
-      : 'http://image10.coupangcdn.com/image/badges/rocket/rocket_logo.png';
+  const rocketURL = {
+    fresh:
+      'http://image7.coupangcdn.com/image/mobile_app/v3/brandsdp/loyalty/pc/rocket-fresh@2x.png',
+    ROCKET: 'http://image10.coupangcdn.com/image/badges/rocket/rocket_logo.png',
+  };
 
   return (
-    <Wrapper>
-      <Image src={src} alt='rocket delivery bage' width={56} height={14} />
-    </Wrapper>
+    <Span>
+      <img src={rocketURL[type]} alt='rocket bage' />
+    </Span>
   );
 };
 
 export default RocketBage;
 
-const Wrapper = styled.span`
+const Span = styled.span`
   margin-left: 4px;
+  display: inline-block;
+  width: 56px;
+
+  & > img {
+    width: 100%;
+  }
 `;
