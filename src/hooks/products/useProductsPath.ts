@@ -4,8 +4,6 @@ import { useState, useEffect, useMemo } from 'react';
 import { TLimit, TSorter } from '../../types/products.types';
 
 const useProductsPath = () => {
-  const router = useRouter();
-
   const [sorter, setSorter] = useState<TSorter>('bestAsc');
   const [limit, setLimit] = useState<TLimit>(12);
   const [page, setPage] = useState<number>(1);
@@ -16,6 +14,8 @@ const useProductsPath = () => {
     () => `?offset=${offset}&limit=${limit}&page=${page}&sorter=${sorter}`,
     [offset, limit, page, sorter]
   );
+
+  const router = useRouter();
 
   useEffect(() => {
     router.push(`/products?sorter=${sorter}&page=${page}`, undefined, {
