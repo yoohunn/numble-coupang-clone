@@ -28,7 +28,7 @@ const OtherItems = ({ otherItems }: IProps) => {
         {items //
           .slice(0, 4)
           .map((item) => (
-            <OtherItem item={item} />
+            <OtherItem key={item.itemId} item={item} />
           ))}
         <BrandshopLink
           link={brandShopLink}
