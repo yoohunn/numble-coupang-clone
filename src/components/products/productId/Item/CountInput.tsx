@@ -6,7 +6,7 @@ const CountInput = ({}: IProps) => {
   return (
     <Wrapper>
       <form>
-        <input type='text' value={1} />
+        <input type='text' defaultValue={1} />
         <div>
           <button>^</button>
           <button>⌵</button>
