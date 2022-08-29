@@ -33,6 +33,11 @@ const Pagination = ({ page: currentPage, setPage, totalPage }: IProps) => {
     setStartPage((start) => start + 10);
   };
 
+  const onSetPage = (page: number) => {
+    if (page === currentPage) return;
+    setPage(page);
+  };
+
   return (
     <Div>
       <Arrow disabled={startPage === 1} onClick={onPrev}>
@@ -42,8 +47,8 @@ const Pagination = ({ page: currentPage, setPage, totalPage }: IProps) => {
       {pages.map((page) => (
         <PageButton
           key={page}
-          onClick={() => setPage(page)}
-          className={currentPage === page ? 'active' : ''}
+          onClick={() => onSetPage(page)}
+          className={page === currentPage ? 'active' : ''}
         >
           {page}
         </PageButton>

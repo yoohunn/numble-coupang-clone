@@ -1,18 +1,22 @@
 import styled from '@emotion/styled';
-import { ISorterState, TSorter } from '../../../types/products.types';
+
+import type { ISorterState } from '../../../types/products.types';
 
 interface IProps extends ISorterState {
-  id: TSorter;
   name: string;
+  isActive: boolean;
 }
 
-const SortTab = ({ id, name, sorter, setSorter }: IProps) => {
-  const active = id === sorter;
+const SortTab = ({ name, isActive, sorter, setSorter }: IProps) => {
+  const onClick = () => {
+    if (isActive) return null;
+    setSorter(sorter);
+  };
 
   return (
-    <Li active={active}>
-      <button onClick={() => setSorter(id)}>
-        {active && <i className='fa-solid fa-check'></i>}
+    <Li active={isActive}>
+      <button onClick={onClick}>
+        {isActive && <i className='fa-solid fa-check'></i>}
         <p>{name}</p>
       </button>
     </Li>

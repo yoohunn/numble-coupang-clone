@@ -24,15 +24,14 @@ const SortTabs = ({ sorter, setSorter, limit, setLimit }: IProps) => {
       {sortTabs.map(({ id, name }) => (
         <SortTab
           key={id}
-          id={id}
           name={name}
-          sorter={sorter}
+          isActive={sorter === id}
+          sorter={id}
           setSorter={setSorter}
         />
       ))}
 
       <Options limit={limit} setLimit={setLimit} />
-      {/* setLimit */}
     </Div>
   );
 };

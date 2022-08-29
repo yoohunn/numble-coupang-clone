@@ -1,12 +1,16 @@
 import styled from '@emotion/styled';
-import { MouseEventHandler } from 'react';
 
 import Option from './Option';
-import { ILimitState } from '../../../types/products.types';
+import type { ILimitState, TLimit } from '../../../types/products.types';
 
 interface IProps extends ILimitState {}
 
 const Select = ({ limit, setLimit }: IProps) => {
+  const onClick = (value: TLimit) => {
+    if (limit === value) return;
+    setLimit(value);
+  };
+
   return (
     <Ul>
       <Option
@@ -20,12 +24,12 @@ const Select = ({ limit, setLimit }: IProps) => {
           value={12}
           isActive={limit === 12}
           icon={<i className='fa-solid fa-angle-up'></i>}
-          onClick={() => setLimit(12)}
+          onClick={() => onClick(12)}
         />
         <Option
           value={24}
           isActive={limit === 24}
-          onClick={() => setLimit(24)}
+          onClick={() => onClick(24)}
         />
       </div>
     </Ul>
