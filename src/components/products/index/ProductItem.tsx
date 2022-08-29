@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
 
-import { IProductItem } from '../../../types/products.types';
+import type { IProductItem } from '../../../types/products.types';
 import Price from '../Price';
 import StarRating from '../StarRating';
 import RocketBage from '../RocketBage';
@@ -21,6 +21,7 @@ const ProductItem = ({ item }: IProps) => {
     salePrice,
     shippinFee,
     expectedDeliveryDate,
+    rating,
   } = item;
 
   return (
@@ -34,8 +35,11 @@ const ProductItem = ({ item }: IProps) => {
           <Name>{name}</Name>
           <Price price={salePrice} orignPrice={originalPrice} unit={'원'} />
           <RocketBage type={rocketType} />
+
           <DeliveryDate>오늘(일) 8/28 도착 보장</DeliveryDate>
-          <StarRating />
+
+          <StarRating average={rating} />
+          <Count>{`(${reviewCount})`}</Count>
         </A>
       </Link>
     </Li>
@@ -83,4 +87,9 @@ const DeliveryDate = styled.span`
   display: inline-block;
   color: #00891a;
   font-size: 14px;
+`;
+
+const Count = styled.span`
+  color: #888;
+  font-size: 11px;
 `;
