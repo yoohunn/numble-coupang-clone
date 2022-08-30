@@ -7,14 +7,12 @@ interface IProps extends IPageState {
   totalPage: number;
 }
 
+const PAGE_COUNT = 10;
+
 const Pagination = ({ page: currentPage, setPage, totalPage }: IProps) => {
   const [startPage, setStartPage] = useState(1);
 
-  const PAGE_COUNT = 10;
-
-  const end = startPage + PAGE_COUNT - 1;
-  const endPage = end > totalPage ? totalPage : end;
-
+  const endPage = Math.min(startPage + PAGE_COUNT - 1, totalPage);
   const pageCount = endPage - startPage + 1;
 
   const pages = Array(pageCount)
