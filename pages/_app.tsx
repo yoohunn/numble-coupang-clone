@@ -2,7 +2,11 @@ import type { AppProps } from 'next/app';
 import { useState } from 'react';
 import Script from 'next/script';
 
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
