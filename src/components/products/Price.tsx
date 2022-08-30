@@ -1,36 +1,29 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+
+type TSize = 'sm' | 'md' | 'lg';
 
 interface IProps {
   price: number;
   orignPrice: number;
-  discountRate?: number;
-  unit: string;
-  size?: Size;
+  /** @default '원' */
+  unit?: string;
+  /** @default 'md' */
+  size?: TSize;
 }
 
-type Size = 'sm' | 'md';
-
-const Price = ({ price, orignPrice, discountRate, unit, size }: IProps) => {
-  const PriceDetail = () => {
-    if (size === 'sm') return null;
-    if (price === orignPrice) return null;
-
-    const getDiscountRate = () =>
-      discountRate ?? Math.floor(((orignPrice - price) / price) * 100);
-
-    return (
-      <Wrapper>
-        {`${getDiscountRate()}%`}
-        <span>{`${orignPrice?.toLocaleString()}원`}</span>
-      </Wrapper>
-    );
-  };
+const Price = ({ price, orignPrice, unit = '원', size = 'md' }: IProps) => {
+  const isShowDetail = size !== 'sm' && price !== orignPrice;
+  const discountRate = Math.floor(((orignPrice - price) / price) * 100);
 
   return (
     <>
-      <PriceDetail />
-      <Strong size={size || 'md'}>
+      {isShowDetail && (
+        <Detail size={size}>
+          {`${discountRate}%`}
+          <span>{`${orignPrice?.toLocaleString()}원`}</span>
+        </Detail>
+      )}
+      <Strong size={size}>
         {price.toLocaleString()}
         <span>{unit}</span>
       </Strong>
@@ -40,33 +33,32 @@ const Price = ({ price, orignPrice, discountRate, unit, size }: IProps) => {
 
 export default Price;
 
-const Strong = styled.strong<{ size?: Size }>`
-  color: #ae0000;
-  font-family: Tahoma;
-  ${({ size }) => (size === 'sm' ? sm : md)}
-`;
-
-const md = css`
-  font-size: 20px;
-  line-height: 21px;
-
-  span {
-    font-size: 90%;
-    margin-left: 2px;
-  }
-`;
-
-const sm = css`
-  font-size: 13px;
-`;
-
-const Wrapper = styled.div`
-  font-size: 14px;
+const Detail = styled.div<{ size: TSize }>`
+  font-size: ${(props) => fontSize.detail[props.size]};
   margin-bottom: 2px;
 
   span {
+    margin-left: 3px;
     text-decoration: line-through;
     color: #888;
-    margin-left: 3px;
   }
 `;
+
+const Strong = styled.strong<{ size: TSize }>`
+  font-size: ${(props) => fontSize.strong[props.size]};
+  color: #ae0000;
+  font-family: Tahoma;
+`;
+
+const fontSize = {
+  strong: {
+    sm: '13px',
+    md: '18px',
+    lg: '20px',
+  },
+  detail: {
+    sm: '12px',
+    md: '12px',
+    lg: '14px',
+  },
+};

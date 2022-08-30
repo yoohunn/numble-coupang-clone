@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
 
 import Title from '../../../common/Title/Title';
-import BlueLink from './BlueLink';
-import CountInput from './CountInput';
-import InsuranceCheck from './InsuranceCheck';
 import Price from '../../Price';
-import Radio from './Radio';
 import RocketBage from '../../RocketBage';
 import StarRating from '../../StarRating';
+
+import CountInput from './CountInput';
+import InsuranceCheck from './InsuranceCheck';
+import BlueLink from './BlueLink';
+import Radio from './Radio';
 import CartBtn from './CartBtn';
 import BuyBtn from './BuyBtn';
 
@@ -24,12 +25,7 @@ const ItemInfo = ({}: IProps) => {
       </Header>
 
       <PriceBox>
-        <Price
-          price={902200}
-          orignPrice={950000}
-          discountRate={5}
-          unit={'원'}
-        />
+        <Price price={902200} orignPrice={950000} size='lg' />
         <RocketBage type='ROCKET' />
       </PriceBox>
 
