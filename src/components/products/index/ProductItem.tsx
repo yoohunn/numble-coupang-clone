@@ -33,13 +33,15 @@ const ProductItem = ({ item }: IProps) => {
           </ImgWrapper>
 
           <Name>{name}</Name>
-          <Price price={salePrice} orignPrice={originalPrice} unit={'원'} />
-          <RocketBage type={rocketType} />
+          <Price price={salePrice} orignPrice={originalPrice} />
+          <RocketBage type={rocketType} width={72} height={16} />
 
           <DeliveryDate>오늘(일) 8/28 도착 보장</DeliveryDate>
 
-          <StarRating average={rating} />
-          <Count>{`(${reviewCount})`}</Count>
+          <Review>
+            <StarRating average={rating} />
+            <span>{`(${reviewCount})`}</span>
+          </Review>
         </A>
       </Link>
     </Li>
@@ -52,7 +54,7 @@ const Li = styled.li`
   padding: 20px;
   border-bottom: 1px solid #ddd;
 
-  &:hover p {
+  &:hover > a > span {
     color: #0073e9;
     text-decoration: underline;
   }
@@ -76,20 +78,24 @@ const ImgWrapper = styled.div`
   }
 `;
 
-const Name = styled.p`
+const Name = styled.span`
+  display: block;
   margin-top: 38px;
   margin-bottom: 8px;
   line-height: 16px;
   font-size: 12px;
 `;
 
-const DeliveryDate = styled.span`
-  display: inline-block;
+const DeliveryDate = styled.p`
+  margin-top: 3px;
   color: #00891a;
   font-size: 14px;
 `;
 
-const Count = styled.span`
+const Review = styled.p`
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
   color: #888;
   font-size: 11px;
 `;

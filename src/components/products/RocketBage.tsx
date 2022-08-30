@@ -4,9 +4,11 @@ import type { TRocket } from '../../types/products.types';
 
 interface IProps {
   type: TRocket;
+  width?: number;
+  height?: number;
 }
 
-const RocketBage = ({ type }: IProps) => {
+const RocketBage = ({ type, width, height }: IProps) => {
   if (type === null) return null;
 
   const rocketURL = {
@@ -15,7 +17,12 @@ const RocketBage = ({ type }: IProps) => {
   };
 
   return (
-    <Image src={rocketURL[type]} alt='rocket bage' width={56} height={14} />
+    <Image
+      src={rocketURL[type]}
+      alt='rocket bage'
+      width={width ?? 56}
+      height={height ?? 14}
+    />
   );
 };
 
