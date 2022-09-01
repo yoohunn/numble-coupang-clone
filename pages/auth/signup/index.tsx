@@ -15,7 +15,7 @@ export default function SignupPage() {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
-  } = useForm<SignupForm>({
+  } = useForm({
     mode: 'onChange',
   });
 
@@ -41,7 +41,7 @@ export default function SignupPage() {
                 icon={i.icon}
                 type={i.type}
                 placeholder={i.placeholder}
-                message={errors[i.name]?.message}
+                message={errors[i.name]?.message?.toString()}
                 isValid={
                   !errors[i.name] && touchedFields[i.name] ? true : false
                 }
@@ -56,7 +56,7 @@ export default function SignupPage() {
         </InputGroup>
         <Section>
           <h1>쿠팡 서비스약관에 동의해주세요 </h1>
-          <CheckboxGroup<SignupForm> //
+          <CheckboxGroup //
             fields={checkboxFields}
             register={register}
             linked={checkboxLinked}

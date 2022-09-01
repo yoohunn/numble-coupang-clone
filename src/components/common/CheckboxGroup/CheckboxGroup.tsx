@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 import React, { ChangeEvent, useMemo, useState } from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, FieldValues } from 'react-hook-form';
 
 import Checkbox from '../Checkbox/Checkbox';
-import { ICheck } from '../../../types/common.types';
+import { ICheckboxFields } from '../../../types/signup.types';
 
-interface IProps<T> {
-  fields: ICheck<T>[];
-  register: UseFormRegister<T>;
+interface IProps {
+  fields: ICheckboxFields[];
+  register: UseFormRegister<FieldValues>;
   linked?: { parent: string | string[]; child: string[] };
 }
 
@@ -15,7 +15,7 @@ const CheckboxGroup = <T extends unknown>({
   fields,
   register,
   linked,
-}: IProps<T>) => {
+}: IProps) => {
   const [isCheck, setIsCheck] = useState<string[]>([]);
   const isCheckAll = useMemo(() => fields.length === isCheck.length, [isCheck]);
 

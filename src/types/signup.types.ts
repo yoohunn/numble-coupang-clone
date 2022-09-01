@@ -9,3 +9,11 @@ type InputFields = {
 };
 
 export type SignupForm = InputFields & CheckFields;
+
+export interface ICheckboxFields {
+  name: string;
+  title: string;
+  required: boolean;
+  description?: string;
+  isChild?: boolean;
+}
