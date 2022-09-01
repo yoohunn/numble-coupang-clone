@@ -38,13 +38,13 @@ Valid.args = {
   isValid: true,
   validations: [
     {
-      type: 'pattern',
-      invalid: false,
+      // type: 'pattern',
+      isValid: false,
       message: '영문/숫자/특수문자 2가지 이상 조합 (8~20자)',
     },
     {
-      type: 'minLength',
-      invalid: false,
+      // type: 'minLength',
+      isValid: false,
       message: '비밀번호는 8자 이상이여야 합니다.',
     },
   ],
@@ -58,13 +58,13 @@ Invalid.args = {
   message: '비밀번호 에러',
   validations: [
     {
-      type: 'pattern',
-      invalid: true,
+      // type: 'pattern',
+      isValid: true,
       message: '영문/숫자/특수문자 2가지 이상 조합 (8~20자)',
     },
     {
-      type: 'minLength',
-      invalid: false,
+      // type: 'minLength',
+      isValid: false,
       message: '비밀번호는 8자 이상이여야 합니다.',
     },
   ],
