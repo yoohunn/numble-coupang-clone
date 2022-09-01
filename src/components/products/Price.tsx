@@ -4,7 +4,7 @@ type TSize = 'sm' | 'md' | 'lg';
 
 interface IProps {
   price: number;
-  orignPrice: number;
+  orignPrice?: number;
   /** @default '원' */
   unit?: string;
   /** @default 'md' */
@@ -13,7 +13,8 @@ interface IProps {
 
 const Price = ({ price, orignPrice, unit = '원', size = 'md' }: IProps) => {
   const isShowDetail = size !== 'sm' && price !== orignPrice;
-  const discountRate = Math.floor(((orignPrice - price) / price) * 100);
+  const discountRate =
+    orignPrice && Math.floor(((orignPrice - price) / price) * 100);
 
   return (
     <>
