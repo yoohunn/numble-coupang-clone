@@ -1,8 +1,8 @@
-import { IInput, ICheck } from '../../types/common.types';
+import { ICheck } from '../../types/common.types';
 import { SignupForm } from '../../types/signup.types';
 
 const useSignupFields = () => {
-  const inputFields: IInput<SignupForm>[] = [
+  const inputFields = [
     { icon: '📧', name: 'email', type: 'email', placeholder: '아이디(이메일)' },
     { icon: '🔒', name: 'password', type: 'password', placeholder: '비밀번호' },
     {
