@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 import { MouseEventHandler, ReactNode } from 'react';
 
-import { TLimit } from '../../../types/products.types';
-
 interface IProps {
   isActive: boolean;
-  value: TLimit;
+  value: number;
   onClick?: MouseEventHandler<HTMLElement>;
   icon?: ReactNode;
 }

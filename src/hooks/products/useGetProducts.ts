@@ -1,19 +1,21 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
-import { IProductItem } from '../../types/products.types';
+import type { IProductItem } from '../../types/products.types';
 
 const useGetProducts = (query: string) => {
   const fetchProducts = () =>
     axios
-      .get(process.env.NEXT_PUBLIC_API_HOST + `/products${query}`)
+      .get(process.env.NEXT_PUBLIC_API_HOST + '/products?' + query)
       .then((res) => res.data);
 
-  const { data } = useQuery<IProductItem[]>(['products'], fetchProducts, {
-    suspense: true,
-  });
+  const { data: products } = useQuery<IProductItem[]>(
+    ['products', query],
+    fetchProducts,
+    { suspense: true, keepPreviousData: true }
+  );
 
-  return { data };
+  return { products };
 };
 
 export default useGetProducts;

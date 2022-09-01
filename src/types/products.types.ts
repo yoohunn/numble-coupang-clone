@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export type TSorter =
   | 'bestAsc'
   | 'salePriceAsc'
@@ -8,20 +6,27 @@ export type TSorter =
   | 'latestAsc';
 
 export interface ISorterState {
-  sorter: TSorter;
-  setSorter: Dispatch<SetStateAction<TSorter>>;
+  sorter?: string | string[];
+  setSorter: (value: TSorter) => void;
 }
 
 export type TLimit = 12 | 24;
 
 export interface ILimitState {
-  limit: TLimit;
-  setLimit: Dispatch<SetStateAction<TLimit>>;
+  limit: number;
+  setLimit: (value: TLimit) => void;
 }
 
 export interface IPageState {
   page: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  setPage: (value: number) => void;
+}
+
+export interface IProuctsParams {
+  offset?: number;
+  limit?: number;
+  sorter?: string | string[];
+  page?: number;
 }
 
 export interface IProductItem {

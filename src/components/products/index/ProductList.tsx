@@ -1,19 +1,23 @@
 import styled from '@emotion/styled';
 
-import { IProductItem } from '../../../types/products.types';
+import useGetProducts from '../../../hooks/products/useGetProducts';
 import ProductItem from './ProductItem';
 
 interface IProps {
-  products: IProductItem[];
+  query: string;
 }
 
-const ProductList = ({ products }: IProps) => (
-  <Ul>
-    {products.map((item) => (
-      <ProductItem key={item.id} item={item} />
-    ))}
-  </Ul>
-);
+const ProductList = ({ query }: IProps) => {
+  const { products } = useGetProducts(query);
+
+  return (
+    <Ul>
+      {products?.map((item) => (
+        <ProductItem key={item.id} item={item} />
+      ))}
+    </Ul>
+  );
+};
 
 export default ProductList;
 

@@ -31,9 +31,9 @@ const Pagination = ({ page: currentPage, setPage, totalPage }: IProps) => {
     setStartPage((start) => start + 10);
   };
 
-  const onSetPage = (page: number) => {
-    if (page === currentPage) return;
-    setPage(page);
+  const onSetPage = (value: number) => {
+    console.log({ currentPage }, value);
+    setPage(value);
   };
 
   return (
