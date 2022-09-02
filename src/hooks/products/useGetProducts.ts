@@ -1,16 +1,18 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
-import type { IProductItem } from '../../types/products.types';
+import type { IProductItem, IProductsQuery } from '../../types/products.types';
 
-const useGetProducts = (query: string) => {
+const useGetProducts = (query: IProductsQuery) => {
+  const queryString = `offset=${query.offset}&page=${query.page}&limit=${query.limit}&sorter=${query.sorter}`;
+  console.log('~ queryString', queryString);
   const fetchProducts = () =>
     axios
-      .get(process.env.NEXT_PUBLIC_API_HOST + '/products?' + query)
+      .get(process.env.NEXT_PUBLIC_API_HOST + '/products?' + queryString)
       .then((res) => res.data);
 
   const { data: products } = useQuery<IProductItem[]>(
-    ['products', query],
+    ['products', queryString],
     fetchProducts,
     { suspense: true, keepPreviousData: true }
   );

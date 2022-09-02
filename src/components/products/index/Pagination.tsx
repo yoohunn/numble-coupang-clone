@@ -32,7 +32,6 @@ const Pagination = ({ page: currentPage, setPage, totalPage }: IProps) => {
   };
 
   const onSetPage = (value: number) => {
-    console.log({ currentPage }, value);
     setPage(value);
   };
 

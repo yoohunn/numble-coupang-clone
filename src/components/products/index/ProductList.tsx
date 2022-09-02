@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
+import type { IProductsQuery } from '../../../types/products.types';
 import useGetProducts from '../../../hooks/products/useGetProducts';
 import ProductItem from './ProductItem';
 
 interface IProps {
-  query: string;
+  query: IProductsQuery;
 }
 
 const ProductList = ({ query }: IProps) => {

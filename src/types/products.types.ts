@@ -22,11 +22,11 @@ export interface IPageState {
   setPage: (value: number) => void;
 }
 
-export interface IProuctsParams {
-  offset?: number;
-  limit?: number;
-  sorter?: string | string[];
-  page?: number;
+export interface IProductsQuery {
+  offset: number;
+  page: number;
+  limit: TLimit;
+  sorter: TSorter;
 }
 
 export interface IProductItem {
