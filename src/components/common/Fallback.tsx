@@ -13,4 +13,5 @@ const Box = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 10rem;
+  width: 1080px;
 `;
