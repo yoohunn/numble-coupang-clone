@@ -16,7 +16,7 @@ import Fallback from '../../src/components/common/Fallback';
 
 const ProductList = dynamic(
   () => import('../../src/components/products/index/ProductList'),
-  { suspense: true }
+  { ssr: false }
 );
 
 export default function ProductListPage() {
