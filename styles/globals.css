@@ -14,3 +14,25 @@ a {
 * {
   box-sizing: border-box;
 }
+
+li {
+  list-style: none;
+}
+
+input {
+  border: 0;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  background-color: transparent;
+}
+
+p,
+h1,
+ul {
+  margin: 0px;
+  padding: 0px;
+}
