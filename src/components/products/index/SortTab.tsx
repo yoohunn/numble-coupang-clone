@@ -10,7 +10,7 @@ interface IProps extends ISorterState {
 
 const SortTab = ({ name, isActive, sorter, setSorter }: IProps) => (
   <Li active={isActive}>
-    <button onClick={() => setSorter(sorter)}>
+    <button disabled={isActive} onClick={() => setSorter(sorter)}>
       {isActive && <i className='fa-solid fa-check'></i>}
       <p>{name}</p>
     </button>
