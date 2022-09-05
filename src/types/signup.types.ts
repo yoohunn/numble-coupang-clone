@@ -1,4 +1,4 @@
-import { SignupAgreements as CheckFields } from '../services/auth.service';
+import { SignupAgreements as CheckFields } from './auth.types';
 
 type InputFields = {
   email: string;
