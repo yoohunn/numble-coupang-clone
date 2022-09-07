@@ -44,6 +44,7 @@ const Pagination = ({ page: currentPage, setPage, totalPage }: IProps) => {
       {pages.map((page) => (
         <PageButton
           key={page}
+          disabled={page === currentPage}
           onClick={() => onSetPage(page)}
           className={page === currentPage ? 'active' : ''}
         >

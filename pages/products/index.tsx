@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState, startTransition } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
@@ -31,6 +31,10 @@ export default function ProductListPage() {
   });
 
   useEffect(() => {
+    if (isEmpty(router.query)) {
+      return;
+    }
+
     const parsed = parseQuery(router.query);
 
     if (!isvalidType(parsed)) {
@@ -38,11 +42,7 @@ export default function ProductListPage() {
       return;
     }
 
-    isEmpty(router.query)
-      ? startTransition(() => updateURL(parsed))
-      : setQuery(parsed);
-
-    console.log('query', parsed);
+    setQuery(parsed);
   }, [router.query]);
 
   // url을 업데이트 한다.
@@ -59,17 +59,14 @@ export default function ProductListPage() {
   };
 
   const updateLimit = (limit: TLimit) => {
-    if (limit === query.limit) return;
     updateURL({ limit });
   };
 
   const updateSorter = (sorter: TSorter) => {
-    if (sorter === query.sorter) return;
     updateURL({ sorter, page: 1, offset: 0 });
   };
 
   const updatePage = (page: number) => {
-    if (page === query.page) return;
     updateURL({ page, offset: (page - 1) * query.limit });
   };
 

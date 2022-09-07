@@ -10,13 +10,16 @@ interface IProps {
 
 const Option = ({ value, isActive, onClick, icon }: IProps) => {
   return (
-    <Li
-      data-value={value}
-      onClick={onClick}
-      className={isActive ? 'active' : ''}
-    >
-      <span>{value}개씩 보기</span>
-      {icon}
+    <Li>
+      <button
+        data-value={value}
+        disabled={isActive}
+        onClick={onClick}
+        className={isActive ? 'active' : ''}
+      >
+        <span>{value}개씩 보기</span>
+        {icon}
+      </button>
     </Li>
   );
 };
@@ -24,24 +27,31 @@ const Option = ({ value, isActive, onClick, icon }: IProps) => {
 export default Option;
 
 const Li = styled.li`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: auto;
-  padding: 0 10px;
-  height: 32px;
-  border: none;
-  background-color: transparent;
-  line-height: 1;
-  font-size: 12px;
-  color: #555;
+  & > button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 105px;
+    margin: auto;
+    padding: 0 10px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+    line-height: 1;
+    font-size: 12px;
+    color: #555;
 
-  &:hover {
-    background-color: #fafafa;
-  }
+    & > span {
+      margin-right: 10px;
+    }
 
-  &.active {
-    font-weight: bold;
+    &:hover {
+      background-color: #fafafa;
+    }
+
+    &.active {
+      font-weight: bold;
+    }
   }
 `;
