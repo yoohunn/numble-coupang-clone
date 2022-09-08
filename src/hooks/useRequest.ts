@@ -11,8 +11,8 @@ export const useGet = <TResult>(
 };
 
 export const useMutate = <TData, TResult>(
-  func: (args: TData) => Promise<TResult>,
-  key: QueryKey
+  key: QueryKey,
+  func: (args: TData) => Promise<TResult>
 ) => {
   const queryClient = useQueryClient();
 

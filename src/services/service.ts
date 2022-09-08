@@ -2,14 +2,15 @@ import axios, { AxiosInstance } from 'axios';
 import { tokenStorage, ITokenStorage } from './tokenStorage';
 
 const baseURL = process.env.NEXT_PUBLIC_API_HOST;
-const bearHeader = { Authorization: `Bearer ${tokenStorage.get('access')}` };
+const bearHeader = {
+  Authorization: `Bearer ${tokenStorage.get('access')}`,
+};
 
 // axiosInstance
 const publicClient = axios.create({ baseURL });
 
 const privateClient = axios.create({
   baseURL,
-  withCredentials: true,
   headers: { ...bearHeader },
 });
 

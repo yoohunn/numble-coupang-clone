@@ -15,7 +15,6 @@ class AuthService extends Service {
 
   async signup(signupData: ISignupData) {
     const { data } = await this.client.post('/auth/signup', signupData);
-
     this.token.set(data);
   }
 

@@ -18,15 +18,15 @@ interface IToken {
 export const tokenStorage: ITokenStorage = {
   get: (type?: 'access' | 'refresh') => {
     const token = {
-      access: cookies.get('refreshToken'),
-      refresh: cookies.get('refreshToken'),
+      access: cookies.get('access'),
+      refresh: cookies.get('refresh'),
     };
 
     return type ? token[type] : token;
   },
 
   set: (token: IToken) => {
-    cookies.set('accessToken', token.access, { expires: 1 });
-    cookies.set('refreshToken', token.refresh, { expires: 7 });
+    cookies.set('access', token.access, { expires: 1 });
+    cookies.set('refresh', token.refresh, { expires: 7 });
   },
 };
