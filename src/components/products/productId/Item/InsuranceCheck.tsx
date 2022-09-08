@@ -12,7 +12,7 @@ const InsuranceCheck = ({ title, price, description }: IProps) => {
       <input type='checkbox' />
       <div>
         <span className='title'>{title}</span>
-        <span className='price'>{`${price}원`}</span>
+        <span className='price'>{`${price.toLocaleString()}원`}</span>
         <p className='description'>{description}</p>
       </div>
     </Wrapper>

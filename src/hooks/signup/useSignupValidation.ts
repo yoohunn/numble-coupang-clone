@@ -6,7 +6,7 @@ const useSignupValidation = (
   errors: FieldErrors<SignupForm>,
   passward: string
 ) => {
-  const validationRules: { [name in Path<SignupForm>]?: RegisterOptions } = {
+  const validationRules: { [name in string]?: RegisterOptions } = {
     email: {
       required: '아이디를 입력해주세요.',
       pattern: {

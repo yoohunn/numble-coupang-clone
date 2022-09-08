@@ -1,8 +1,8 @@
-import { IInput, ICheck } from '../../types/common.types';
-import { SignupForm } from '../../types/signup.types';
+// import { ICheck } from '../../types/common.types';
+import { ICheckboxFields, SignupForm } from '../../types/signup.types';
 
 const useSignupFields = () => {
-  const inputFields: IInput<SignupForm>[] = [
+  const inputFields = [
     { icon: '📧', name: 'email', type: 'email', placeholder: '아이디(이메일)' },
     { icon: '🔒', name: 'password', type: 'password', placeholder: '비밀번호' },
     {
@@ -20,7 +20,7 @@ const useSignupFields = () => {
     },
   ];
 
-  const checkboxFields: ICheck<SignupForm>[] = [
+  const checkboxFields: ICheckboxFields[] = [
     {
       name: 'terms_fourteen',
       title: '[필수] 만 14세 이상입니다',

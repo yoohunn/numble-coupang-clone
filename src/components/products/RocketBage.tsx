@@ -1,30 +1,29 @@
 import Image from 'next/image';
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
+
+import type { TRocket } from '../../types/products.types';
 
 interface IProps {
-  type: 'ROCKET' | null;
+  type: TRocket;
+  width?: number;
+  height?: number;
 }
 
-const RocketBage = ({ type }: IProps) => {
+const RocketBage = ({ type, width, height }: IProps) => {
   if (type === null) return null;
 
+  const rocketURL = {
+    fresh: '/rocket-fresh.png',
+    ROCKET: '/rocket.png',
+  };
+
   return (
-    <Wrapper>
-      <Image
-        src={
-          'http://image10.coupangcdn.com/image/badges/rocket/rocket_logo.png'
-        }
-        alt='rocket delivery bage'
-        width={56}
-        height={14}
-      />
-    </Wrapper>
+    <Image
+      src={rocketURL[type]}
+      alt='rocket bage'
+      width={width ?? 56}
+      height={height ?? 14}
+    />
   );
 };
 
 export default RocketBage;
-
-const Wrapper = styled.span`
-  margin-left: 4px;
-`;

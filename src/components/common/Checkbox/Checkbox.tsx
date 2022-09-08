@@ -20,6 +20,8 @@ const Checkbox = forwardRef<HTMLInputElement, ICheckbox>(
   )
 );
 
+Checkbox.displayName = 'Checkbox';
+
 export default Checkbox;
 
 const Wrapper = styled.div<{ bold?: boolean; isChild?: boolean }>`

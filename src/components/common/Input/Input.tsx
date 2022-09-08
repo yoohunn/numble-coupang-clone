@@ -18,6 +18,7 @@ const Input = forwardRef<HTMLInputElement, IIput>(
     </Wrapper>
   )
 );
+Input.displayName = 'Input';
 
 export default Input;
 
@@ -80,8 +81,8 @@ interface IMessage {
 const Messages = ({ message, validations }: IMessage) => (
   <Box>
     {validations
-      ? validations.map(({ isValid, message }) => (
-          <ValidMessages isValid={isValid}>
+      ? validations.map(({ isValid, message }, index) => (
+          <ValidMessages key={index} isValid={isValid}>
             <span>{isValid ? 'X' : '✓'}</span>
             {message}
           </ValidMessages>

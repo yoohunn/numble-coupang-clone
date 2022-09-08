@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import useProductMock from '../../src/hooks/products/useProductMock';
-import Metatags from '../../src/components/products/MetaTage';
-import Breadcrumble from '../../src/components/products/sections/Breadcrumble/Breadcrumble';
-import Item from '../../src/components/products/sections/Item/Item';
-import OtherItems from '../../src/components/products/sections/OtherItems/OtherItems';
-import Details from '../../src/components/products/sections/Details/Details';
+import ProductMeta from '../../src/components/products/ProductMeta';
+import Breadcrumble from '../../src/components/products/productId/Breadcrumble/Breadcrumble';
+import Item from '../../src/components/products/productId/Item/Item';
+import OtherItems from '../../src/components/products/productId/OtherItems/OtherItems';
+import Details from '../../src/components/products/productId/Details/Details';
 
 export default function VendoritemPage() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function VendoritemPage() {
 
   return (
     <Main>
-      <Metatags title={item?.itemName} url={item?.images[0].thumbnailImage} />
+      <ProductMeta itemName={item?.itemName} imageUrl={''} />
 
       <Breadcrumble breadcrumble={breadcrumble} />
       <Item item={item} />

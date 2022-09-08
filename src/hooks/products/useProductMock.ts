@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { productsService } from '../../services/products.service';
 
 import {
   IBreadcremble,
@@ -19,29 +19,21 @@ const useProductMock = (props: { itemId?: number; vendoritemid?: number }) => {
   const vendoritemId = props.vendoritemid || 3;
 
   useEffect(() => {
-    axios
-      .get(
-        `https://coupang.numble.it/api/products/${productId}/vendoritems/${vendoritemId}`
-      )
-      .then((res) => setItem(res.data));
+    productsService
+      .getItems(productId, vendoritemId)
+      .then((data) => setItem(data));
 
-    axios
-      .get(
-        `https://coupang.numble.it/api/products/${productId}/items/${itemId}/vendoritems/${vendoritemId}`
-      )
-      .then((res) => setDetails(res.data));
+    productsService
+      .getDetails(productId, itemId, vendoritemId)
+      .then((data) => setDetails(data));
 
-    axios
-      .get(
-        `https://coupang.numble.it/api/products/${productId}/brand-sdp/widget/brand-sdp?itemId=${itemId}&vendoritemId=${vendoritemId}`
-      )
-      .then((res) => setOthderItems(res.data));
+    productsService
+      .getOtherItems(productId, itemId, vendoritemId)
+      .then((data) => setOthderItems(data));
 
-    axios
-      .get(
-        `https://coupang.numble.it/api/products/${productId}/breadcrumb-gnbmenu`
-      )
-      .then((res) => setBreadcrumble(res.data));
+    productsService
+      .getBreadcrumble(productId)
+      .then((data) => setBreadcrumble(data));
   }, []);
 
   return { item, details, breadcrumble, otherItems };
