@@ -11,17 +11,26 @@ class AuthService extends Service {
     });
 
     this.token.set(data);
+    return data;
   }
 
   async signup(signupData: ISignupData) {
     const { data } = await this.client.post('/auth/signup', signupData);
+
     this.token.set(data);
+    return data;
   }
 
   async login(loginData: ILoginData) {
     const { data } = await this.client.post('/auth/login', loginData);
 
     this.token.set(data);
+    return data;
+  }
+
+  async logout() {
+    // add logout api url
+    this.token.remove();
   }
 }
 

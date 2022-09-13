@@ -1,18 +1,23 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import type { QueryKey, UseBaseQueryOptions } from '@tanstack/react-query';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  UseQueryOptions,
+} from '@tanstack/react-query';
+import type { QueryKey } from '@tanstack/react-query';
 
-export const useGet = <TResult>(
+export const useQueryData = <TResult>(
   key: QueryKey,
   func: () => Promise<TResult>,
-  option?: UseBaseQueryOptions
+  options?: UseQueryOptions<TResult>
 ) => {
-  const { data } = useQuery(key, func, option);
+  const { data } = useQuery<TResult>(key, func, options);
   return data;
 };
 
-export const useMutate = <TData, TResult>(
-  key: QueryKey,
-  func: (args: TData) => Promise<TResult>
+export const useMutate = <TValue, TResult>(
+  func: (value: TValue) => Promise<TResult>,
+  key: QueryKey
 ) => {
   const queryClient = useQueryClient();
 

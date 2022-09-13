@@ -8,6 +8,7 @@ export interface ITokenStorage {
     | undefined
     | { access: string | undefined; refresh: string | undefined };
   set: (token: IToken) => void;
+  remove: () => void;
 }
 
 interface IToken {
@@ -28,5 +29,10 @@ export const tokenStorage: ITokenStorage = {
   set: (token: IToken) => {
     cookies.set('access', token.access, { expires: 1 });
     cookies.set('refresh', token.refresh, { expires: 7 });
+  },
+
+  remove: () => {
+    cookies.remove('access');
+    cookies.remove('refresh');
   },
 };

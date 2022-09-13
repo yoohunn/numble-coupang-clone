@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { productsService } from '../../services/products.service';
+import { ProductsService } from '../../services';
 
 import {
   IBreadcremble,
@@ -19,21 +19,21 @@ const useProductMock = (props: { itemId?: number; vendoritemid?: number }) => {
   const vendoritemId = props.vendoritemid || 3;
 
   useEffect(() => {
-    productsService
-      .getItems(productId, vendoritemId)
-      .then((data) => setItem(data));
+    ProductsService.getItems(productId, vendoritemId).then((data) =>
+      setItem(data)
+    );
 
-    productsService
-      .getDetails(productId, itemId, vendoritemId)
-      .then((data) => setDetails(data));
+    ProductsService.getDetails(productId, itemId, vendoritemId).then((data) =>
+      setDetails(data)
+    );
 
-    productsService
-      .getOtherItems(productId, itemId, vendoritemId)
-      .then((data) => setOthderItems(data));
+    ProductsService.getOtherItems(productId, itemId, vendoritemId).then(
+      (data) => setOthderItems(data)
+    );
 
-    productsService
-      .getBreadcrumble(productId)
-      .then((data) => setBreadcrumble(data));
+    ProductsService.getBreadcrumble(productId).then((data) =>
+      setBreadcrumble(data)
+    );
   }, []);
 
   return { item, details, breadcrumble, otherItems };

@@ -20,6 +20,11 @@ const ProductList = dynamic(
 );
 
 export default function ProductListPage() {
+  /**
+ * 2. ProductListPage의 query 관련 기능들을 hook으로 모듈화해보아요
+    관심사가 같은 기능들을 묶고, 적절히 캡슐화해보아요. 가독성이 좋아집니다.
+ */
+
   // url을 읽어와 valid 하면 state에 설정한다.
   const router = useRouter();
 

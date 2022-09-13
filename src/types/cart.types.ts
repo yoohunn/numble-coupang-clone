@@ -1,3 +1,5 @@
+import { DebouncedFunc } from 'lodash';
+
 export interface ICartItem {
   id: number;
   quantity: number;
@@ -5,7 +7,7 @@ export interface ICartItem {
 }
 
 export interface IProduct {
-  expectedDeliveryDate: Date;
+  expectedDeliveryDate: string;
   id: number;
   imageUrl: string;
   isAssured: boolean;
@@ -23,4 +25,38 @@ export interface IProduct {
   shippinFee: number;
   weight: number | null;
   wowPrice: number;
+}
+
+export interface ICartPrice {
+  product: number;
+  shipping: number;
+}
+
+export type TOnRemove = (id: number) => void;
+export type TOnRemoveSelected = () => void;
+export type TOnChageQuantity = DebouncedFunc<
+  (id: number, quantity: number, option: { onError: () => void }) => void
+>;
+
+export type TCartType = 'seller' | 'rocket';
+export type TOnSelect = (id: number, checked: boolean) => void;
+export type TOnSelectAll = () => void;
+export type TIsSelected = (id: number) => boolean | boolean;
+
+export interface ICartItemProps extends ICartSelectProps, ICartContentProps {}
+
+export interface ICartContentProps {
+  type: TCartType;
+  onRemove: TOnRemove;
+  onChangeQuantity: TOnChageQuantity;
+}
+
+export interface ICartSelectProps {
+  isSelected: TIsSelected;
+  onSelect: TOnSelect;
+}
+
+export interface ICartSelectAllProps {
+  isSelectedAll: boolean;
+  onSelectAll: TOnSelectAll;
 }

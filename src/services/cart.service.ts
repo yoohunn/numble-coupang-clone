@@ -11,13 +11,13 @@ class CartService extends PrivateService {
     return data;
   }
 
-  async update(id: number) {
-    const res = await this.client.patch('/cart-item/' + id);
+  async update(id: number, quantity: number) {
+    const res = await this.client.patch('/cart-items/' + id, { quantity });
     return res;
   }
 
   async delete(id: number) {
-    const res = await this.client.delete('/cart-item/' + id);
+    const res = await this.client.delete('/cart-items/' + id);
     return res;
   }
 }
