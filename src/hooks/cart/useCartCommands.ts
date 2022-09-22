@@ -4,7 +4,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useDeleteCart, useInitCart, useUpdateCart } from './useCartRequest';
 import type { ICartItem } from '../../types';
 
-export const useHandleCart = (
+export const useCartCommands = (
   cart: ICartItem[],
   selectedIds: number[],
   setSeletedIds: Dispatch<SetStateAction<number[]>>

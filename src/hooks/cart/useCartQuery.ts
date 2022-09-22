@@ -1,6 +1,6 @@
 import type { ICartItem, ICartPrice } from '../../types';
 
-export const useCartData = (cart: ICartItem[], selectedIds: number[]) => {
+export const useCartQuery = (cart: ICartItem[], selectedIds: number[]) => {
   const rocketItems = cart.filter((item) => item.product.rocketType !== null);
   const sellerItems = cart.filter((item) => item.product.rocketType === null);
 

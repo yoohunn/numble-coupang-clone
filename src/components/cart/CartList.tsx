@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 
 import type { ICartItem } from '../../types';
-import { useCartData, useHandleCart } from '../../hooks/cart';
+import { useCartQuery, useCartCommands } from '../../hooks/cart';
 import { Head, Order, Foot, TotalPrice, CartFallback } from './CartListSection';
 
 interface IProps {
@@ -20,10 +20,10 @@ export default function CartList({ cart }: IProps) {
     onSelectAll,
     isSelected,
     isSelectedAll,
-  } = useHandleCart(cart, selectedIds, setSeletedIds);
+  } = useCartCommands(cart, selectedIds, setSeletedIds);
 
   const { rocketItems, sellerItems, rocketPrice, sellerPrice, totalPrice } =
-    useCartData(cart, selectedIds);
+    useCartQuery(cart, selectedIds);
 
   if (cart.length === 0) return <CartFallback isUser={true} />;
 
