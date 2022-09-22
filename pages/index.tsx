@@ -17,7 +17,8 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>Hello World!</h1>
 
         <p className={styles.description}>
-          Get started by editing <code className={styles.code}>pages/cart</code>
+          Get started by editing{" "}
+          <code className={styles.code}>pages/checkout/[id]</code>
         </p>
       </main>
 
