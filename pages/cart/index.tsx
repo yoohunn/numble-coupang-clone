@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import { useGetCart } from '../../src/hooks/cart';
-import AuthCheck from '../../src/components/common/AuthCheck';
+import { AuthCheck } from '../../src/components/global';
 
 const CartList = dynamic(() => import('../../src/components/cart/CartList'));
 

@@ -12,7 +12,7 @@ import type {
 
 import SortTabs from '../../src/components/products/index/SortTabs';
 import Pagination from '../../src/components/products/index/Pagination';
-import Fallback from '../../src/components/common/Fallback';
+import { Fallback } from '../../src/components/global';
 
 const ProductList = dynamic(
   () => import('../../src/components/products/index/ProductList'),
