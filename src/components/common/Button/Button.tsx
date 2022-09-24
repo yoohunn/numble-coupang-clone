@@ -5,11 +5,12 @@ import styled from '@emotion/styled';
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   to?: string;
   colored?: boolean;
+  size?: 'sm' | 'md';
 }
 
-const Button = ({ to, colored, children, ...props }: IButton) => {
+const Button = ({ to, colored, size = 'md', children, ...props }: IButton) => {
   const button = (
-    <SButton colored={colored} {...props}>
+    <SButton colored={colored} size={size} {...props}>
       {children}
     </SButton>
   );
@@ -25,14 +26,14 @@ const Button = ({ to, colored, children, ...props }: IButton) => {
 
 export default Button;
 
-export const SButton = styled.button<{ colored?: boolean }>`
+export const SButton = styled.button<{ colored?: boolean; size: 'sm' | 'md' }>`
   display: block;
-  width: 100%;
-  padding: 17px 0;
+  width: ${(props) => (props.size === 'md' ? '100%' : '68px')};
+  padding: ${(props) => (props.size === 'md' ? '17px 0' : '6px 11px')};
   border-radius: 2px;
-  font-size: 17px;
+  font-size: ${(props) => (props.size === 'md' ? '17px' : '14px')};
   line-height: 20px;
-  font-weight: 700;
+  font-weight: ${(props) => (props.size === 'md' ? '700' : '500')};
   text-align: center;
   color: ${({ colored }) => (colored ? '#fff' : '#0074e9')};
   background-color: ${({ colored }) => (colored ? '#0074e9' : '#fff')};
