@@ -1,26 +1,27 @@
 import { useState } from 'react';
-import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
-import type { IAddress } from '../../src/types/checkout.types';
-import { useQueryData } from '../../src/hooks/useRequest';
-import { CheckoutService } from '../../src/services';
+import { useAddressQuery, usePickedIdCommands } from '../../src/hooks';
 
 import { CoupangHead } from '../../src/components/global';
 import { Card } from '../../src/components/checkout';
 import { Button } from '../../src/components/common';
+import {
+  Header,
+  H3,
+  Body,
+  Cards,
+} from '../../src/components/checkout/styles/address';
 
 export default function Addressbook() {
-  const addresses = useQueryData<IAddress[]>(['address'], () =>
-    CheckoutService.getAddress()
-  );
+  const { id } = useRouter().query;
+  
+  if (!id) return null;
 
-  const [picked, setPicked] = useState(1);
+  const [pickedId, setPickedId] = useState(+id);
+  const { changePicked } = usePickedIdCommands(setPickedId);
 
-  const changePicked = (address: IAddress) => {
-    setPicked(address.id);
-    // postMessage(address)
-    window.close();
-  };
+  const { addresses } = useAddressQuery();
 
   return (
     <>
@@ -33,8 +34,9 @@ export default function Addressbook() {
         <Cards>
           {addresses?.map((address) => (
             <Card
-              isPicked={address.id === picked}
-              onClickPicked={changePicked}
+              key={address.id}
+              isPicked={address.id === pickedId}
+              onPick={changePicked}
               address={address}
             />
           ))}
@@ -51,35 +53,3 @@ const NewAddressBtn = () => (
     배송지 추가
   </Button>
 );
-
-const Header = styled.header`
-  width: 100%;
-  margin: auto;
-  border: 0;
-  padding: 9px 0;
-  color: #111;
-  line-height: 22px;
-  text-align: center;
-  border: 1px solid #ccc;
-`;
-
-const H3 = styled.h3`
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-`;
-
-const Body = styled.div`
-  margin: auto;
-  min-width: 300px;
-  max-width: 460px;
-  padding: 10px 10px 30px;
-  font-size: 15px;
-  line-height: 19px;
-  font-family: apple sd gothic neo, malgun gothic, nanumbarungothic, nanumgothic,
-    dotum, sans-serif;
-`;
-
-const Cards = styled.div`
-  margin-bottom: 10px;
-`;

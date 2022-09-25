@@ -1,5 +1,5 @@
 import { PrivateService } from './service';
-import type { ICompleteData } from '../types/checkout.types';
+import type { IOrderData } from '../types/checkout.types';
 
 class CheckoutService extends PrivateService {
   async getOrdersheet(id: number, accessToken?: string) {
@@ -17,8 +17,8 @@ class CheckoutService extends PrivateService {
     return data;
   }
 
-  async completeOrder(completeData: ICompleteData) {
-    await this.client.post('/order/complete', completeData);
+  async completeOrder(completeData: IOrderData) {
+    return await this.client.post('/order/complete', completeData);
   }
 }
 

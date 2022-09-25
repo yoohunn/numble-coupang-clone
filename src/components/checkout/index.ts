@@ -4,3 +4,7 @@ export { default as AddressInfo } from './AddressInfo';
 export { default as CheckoutInfo } from './CheckoutInfo';
 export { default as Card } from './Card';
 export { default as PaymentButtons } from './PaymentButtons';
+export { default as Ordersheet } from './Ordersheet';
+export { default as PayMethodContent } from './PayMethodContent';
+export { default as CashContent } from './CashContent';
+export { default as Row } from './InfoRow';

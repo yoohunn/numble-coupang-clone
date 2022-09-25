@@ -52,13 +52,19 @@ export interface IOrdersheet {
 }
 
 //
-export interface ICompleteData {
+export type TPayMethod = 'mobile' | 'coupaymoney';
+export type TMobileCarrier = 'skt' | 'kt' | 'hello' | 'kct' | '';
+
+export interface IOrderData extends IPayData {
   ordersheetId: number;
   addressId: number;
   usedCash: number;
-  payMethod: 'mobile' | 'coupaymoney';
+}
+
+export interface IPayData {
+  payMethod: TPayMethod;
   /** 'mobile' 결제에서 필수입니다. */
-  mobileCarrier?: 'skt' | 'kt' | 'hello' | 'kct';
+  mobileCarrier?: TMobileCarrier;
   /** 'coupaymoney' 결제에서 필수입니다. */
   usedCoupaymoney?: number;
 }

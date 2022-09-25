@@ -1,27 +1,27 @@
-import type { IAddress } from '../../types/checkout.types';
+import type { IAddress } from '../../types';
 import { Label } from '../common';
-import { H2, LabelBox, Table, Button } from './styles.checkout';
+import { H2, LabelBox, Table, Button } from './styles/checkout';
 import Row from './InfoRow';
 
 interface IProps {
   info: IAddress;
-  onAddressClick: () => void;
+  onAddress: () => void;
 }
 
-export default function AddressInfo({ info, onAddressClick }: IProps) {
+export default function AddressInfo({ info, onAddress }: IProps) {
   const {
     receiver,
+    isFreshAvailable,
+    isWowAAvailable,
     base,
     detail,
     phoneNumber,
-    isFreshAvailable,
-    isWowAAvailable,
   } = info;
 
   return (
     <>
       <H2>
-        받는사람정보 <Button onClick={onAddressClick}>배송지변경</Button>
+        받는사람정보 <Button onClick={onAddress}>배송지변경</Button>
       </H2>
       <Table>
         <Row

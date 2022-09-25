@@ -1,16 +1,16 @@
-import styled from '@emotion/styled';
-
-import { IAddress } from '../../types/checkout.types';
+import type { IAddress } from '../../types/checkout.types';
 import { Button, Label } from '../common';
+import { CardBox, Div, Flex, H3, LabelBox, P } from './styles/address';
 
 interface IProps {
   address: IAddress;
   isPicked: boolean;
-  onClickPicked: (address: IAddress) => void;
+  onPick: (id: number, address: IAddress) => void;
 }
 
-export default function Card({ address, isPicked, onClickPicked }: IProps) {
+export default function Card({ address, isPicked, onPick }: IProps) {
   const {
+    id,
     receiver,
     base,
     detail,
@@ -31,40 +31,10 @@ export default function Card({ address, isPicked, onClickPicked }: IProps) {
       <Div>일반: 문 앞 / 새벽: 문 앞 (자유 출입가능)</Div>
       <Flex>
         <Button size='sm'>수정</Button>
-        <Button size='sm' colored onClick={() => onClickPicked(address)}>
+        <Button size='sm' colored onClick={() => onPick(id, address)}>
           선택
         </Button>
       </Flex>
     </CardBox>
   );
 }
-
-const CardBox = styled.div<{ isPicked: boolean }>`
-  padding: 15px;
-  border: 1px solid #ccc;
-  border: ${(props) =>
-    props.isPicked ? '2px solid #0073e9' : '1px solid #ccc'};
-`;
-
-const H3 = styled.h3`
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-`;
-
-const LabelBox = styled.div`
-  margin: 9px 0 2px 0;
-`;
-
-const P = styled.p`
-  margin-top: 4px;
-`;
-
-const Div = styled.div`
-  margin: 8px 0 6px 0;
-`;
-
-const Flex = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

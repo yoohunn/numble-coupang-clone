@@ -1,13 +1,16 @@
-import { ICartItem, ICartPrice } from '../types';
+import type { ICartItem, ICartPrice } from '../types';
 
-export function parseCookie(cookie?: string, tokenType?: 'access' | 'refresh') {
+export function parseCookie(
+  cookie?: string,
+  tokenType: 'access' | 'refresh' = 'access'
+) {
   return cookie
     ?.split(';')
-    .find((s) => s.includes(tokenType || 'access'))
+    .find((s) => s.includes(tokenType))
     ?.split('=')[1];
 }
 
-export function parseInt(string: string | string[] | undefined) {
+export function parseQuery(string: string | string[] | undefined) {
   return +(string as string);
 }
 
