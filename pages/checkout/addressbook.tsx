@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { useAddressQuery, useBroadcaster } from '../../src/hooks';
@@ -15,14 +15,20 @@ import {
 } from '../../src/components/checkout/styles/address';
 
 export default function Addressbook() {
-  const { id } = useRouter().query;
-  if (!id) return null;
+  const [pickedId, setPickedId] = useState<number>();
+
+  const router = useRouter();
+  const { isReady, query } = router;
+
+  useEffect(() => {
+    if (isReady && query.id) {
+      setPickedId(+query.id);
+    }
+  }, [isReady]);
 
   const { addresses } = useAddressQuery();
 
   const { postMessage } = useBroadcaster('address');
-
-  const [pickedId, setPickedId] = useState<number>(+id);
 
   const changePickedId = (address: IAddress) => {
     setPickedId(address.id);
