@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { useAddressQuery, usePickedIdCommands } from '../../src/hooks';
+import { useAddressQuery, useBroadcaster } from '../../src/hooks';
 
+import type { IAddress } from '../../src/types';
 import { CoupangHead } from '../../src/components/global';
 import { Card } from '../../src/components/checkout';
 import { Button } from '../../src/components/common';
@@ -15,13 +16,19 @@ import {
 
 export default function Addressbook() {
   const { id } = useRouter().query;
-  
   if (!id) return null;
 
-  const [pickedId, setPickedId] = useState(+id);
-  const { changePicked } = usePickedIdCommands(setPickedId);
-
   const { addresses } = useAddressQuery();
+
+  const { postMessage } = useBroadcaster('address');
+
+  const [pickedId, setPickedId] = useState<number>(+id);
+
+  const changePickedId = (address: IAddress) => {
+    setPickedId(address.id);
+    postMessage(address);
+    window.close();
+  };
 
   return (
     <>
@@ -36,7 +43,7 @@ export default function Addressbook() {
             <Card
               key={address.id}
               isPicked={address.id === pickedId}
-              onPick={changePicked}
+              onPick={changePickedId}
               address={address}
             />
           ))}

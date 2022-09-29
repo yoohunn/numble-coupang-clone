@@ -55,16 +55,20 @@ export interface IOrdersheet {
 export type TPayMethod = 'mobile' | 'coupaymoney';
 export type TMobileCarrier = 'skt' | 'kt' | 'hello' | 'kct' | '';
 
-export interface IOrderData extends IPayData {
-  ordersheetId: number;
-  addressId: number;
+export interface IOrderData {
   usedCash: number;
-}
-
-export interface IPayData {
   payMethod: TPayMethod;
   /** 'mobile' 결제에서 필수입니다. */
   mobileCarrier?: TMobileCarrier;
+}
+
+export interface IPaymentData extends IOrderData {
+  ordersheetId: number;
+  addressId: number;
   /** 'coupaymoney' 결제에서 필수입니다. */
   usedCoupaymoney?: number;
 }
+
+export type TOnChangePayMethod = (
+  changed: Omit<IOrderData, 'usedCash'>
+) => void;

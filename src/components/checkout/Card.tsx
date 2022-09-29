@@ -5,7 +5,7 @@ import { CardBox, Div, Flex, H3, LabelBox, P } from './styles/address';
 interface IProps {
   address: IAddress;
   isPicked: boolean;
-  onPick: (id: number, address: IAddress) => void;
+  onPick: (address: IAddress) => void;
 }
 
 export default function Card({ address, isPicked, onPick }: IProps) {
@@ -31,7 +31,7 @@ export default function Card({ address, isPicked, onPick }: IProps) {
       <Div>일반: 문 앞 / 새벽: 문 앞 (자유 출입가능)</Div>
       <Flex>
         <Button size='sm'>수정</Button>
-        <Button size='sm' colored onClick={() => onPick(id, address)}>
+        <Button size='sm' colored onClick={() => onPick(address)}>
           선택
         </Button>
       </Flex>

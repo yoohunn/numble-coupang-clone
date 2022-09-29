@@ -1,6 +1,6 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useState } from 'react';
+import type { ChangeEvent, MouseEvent } from 'react';
 
-import { Price } from '../global';
 import {
   Button,
   Inline,
@@ -10,6 +10,7 @@ import {
   Form,
   MessageBox,
 } from './styles/checkout';
+import { Price } from '../global';
 
 interface IProps {
   usedCash: number;
@@ -52,7 +53,7 @@ interface ICashForm {
 const CashForm = ({ coupangCash, onUsedCashChange }: ICashForm) => {
   const [value, setValue] = useState('');
 
-  const invalid = +value > coupangCash;
+  const isInvalid = +value > coupangCash;
 
   const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     const checkNum = /[^0-9]/g;
@@ -81,11 +82,11 @@ const CashForm = ({ coupangCash, onUsedCashChange }: ICashForm) => {
       <input type='checkbox' onClick={onCheckChange} />
       <span>모두사용</span>
       <div>
-        <Button colored disabled={invalid} type='submit'>
+        <Button colored disabled={isInvalid} type='submit'>
           쿠팡캐시적용
         </Button>
       </div>
-      {invalid && <InvaidMessage />}
+      {isInvalid && <InvaidMessage />}
     </Form>
   );
 };

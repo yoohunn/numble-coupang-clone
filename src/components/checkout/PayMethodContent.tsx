@@ -1,37 +1,29 @@
-import { useState } from 'react';
-
-import type { IPayData, TMobileCarrier, TPayMethod } from '../../types';
+import type {
+  IOrderData,
+  TMobileCarrier,
+  TOnChangePayMethod,
+  TPayMethod,
+} from '../../types';
 import { Content, ContentSpan, CoupayStyles } from './styles/checkout';
 import { Price } from '../global';
+import { Radio } from '../common';
 
 interface IProps {
+  orderData: IOrderData;
   coupayMoney: number;
-  onPayMethodChange: (payData: IPayData) => void;
+  onPayMethodChange: TOnChangePayMethod;
 }
 
 export default function PayMethodContent({
+  orderData,
   coupayMoney,
   onPayMethodChange,
 }: IProps) {
-  const defaultPayData: IPayData = {
-    payMethod: 'coupaymoney',
-    usedCoupaymoney: 0,
-    mobileCarrier: '',
-  };
+  const onChange = (payMethod: TPayMethod) =>
+    onPayMethodChange({ payMethod, mobileCarrier: '' });
 
-  const [payData, setPayData] = useState<IPayData>(defaultPayData);
-
-  const onChange = (payMethod: TPayMethod) => {
-    const changed = { ...defaultPayData, payMethod };
-    setPayData(changed);
-    onPayMethodChange(changed);
-  };
-
-  const onSelect = (mobileCarrier: TMobileCarrier) => {
-    const selected = { ...payData, mobileCarrier };
-    setPayData(selected);
-    onPayMethodChange(selected);
-  };
+  const onSelect = (mobileCarrier: TMobileCarrier) =>
+    onPayMethodChange({ ...orderData, mobileCarrier });
 
   return (
     <>
@@ -41,16 +33,21 @@ export default function PayMethodContent({
           onChange((e.target as HTMLInputElement).value as TPayMethod);
         }}
       >
-        <Radio value='coupaymoney' title='쿠페이 머니' defaultChecked />
-        <Radio value='mobile' title='휴대폰' />
+        <Radio
+          name='payMethod'
+          value='coupaymoney'
+          title='쿠페이 머니'
+          defaultChecked
+        />
+        <Radio name='payMethod' value='mobile' title='휴대폰' />
       </form>
       <Content>
         <CoupayContent
-          isActive={payData.payMethod === 'coupaymoney'}
+          isActive={orderData.payMethod === 'coupaymoney'}
           coupayMoney={coupayMoney}
         />
         <MobileContent
-          isActive={payData.payMethod === 'mobile'}
+          isActive={orderData.payMethod === 'mobile'}
           onSelect={onSelect}
         />
       </Content>
@@ -98,22 +95,3 @@ const MobileContent = ({ isActive, onSelect }: IMoobileContent) => {
     </>
   );
 };
-
-//
-interface IRadio {
-  value: TPayMethod;
-  title: string;
-  defaultChecked?: boolean;
-}
-
-const Radio = ({ value, title, defaultChecked }: IRadio) => (
-  <label>
-    <input
-      type='radio'
-      name='payMethod'
-      value={value}
-      defaultChecked={defaultChecked}
-    />
-    {title}
-  </label>
-);

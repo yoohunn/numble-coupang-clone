@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
-import type { IOrderData, IOrdersheet } from '../../types';
-import { getOrderTotalPrice } from '../../utils';
-import { useOrderCommands, usePaymentCommands } from '../../hooks';
+import {
+  useSubscriber,
+  useOrderCommands,
+  usePaymentCommands,
+} from '../../hooks';
 
+import type { IAddress, IOrderData, IOrdersheet } from '../../types';
+import { getOrderTotalPrice } from '../../utils';
 import { H1, Section } from './styles/checkout';
 import { CheckoutInfo, BuyerInfo, AddressInfo, PaymentButtons } from './index';
 
@@ -12,24 +16,30 @@ interface IProps {
   ordersheet: IOrdersheet;
 }
 
-export default function Ordersheet(props: IProps) {
-  const [ordersheet, setOrdersheet] = useState<IOrdersheet>(props.ordersheet);
-  const { buyer, address, coupangCash, coupayMoney, orderItems } = ordersheet;
+export default function Ordersheet({ id, ordersheet }: IProps) {
+  const { buyer, coupangCash, coupayMoney, orderItems } = ordersheet;
+
+  // Query
+  const [address, setAddress] = useState<IAddress>(ordersheet.address);
 
   const [orderData, setOrderData] = useState<IOrderData>({
-    ordersheetId: props.id,
-    addressId: address.id,
     usedCash: 0,
     payMethod: 'coupaymoney',
-    usedCoupaymoney: 0,
   });
 
-  const { changeUsedCash, changePayMethod } = useOrderCommands({
-    setOrdersheet,
-    setOrderData,
-  });
+  const paymentData = {
+    ordersheetId: id,
+    addressId: address.id,
+    usedCoupaymoney: coupayMoney,
+    ...orderData,
+  };
 
-  const { pay, payByRocket } = usePaymentCommands(orderData);
+  // Commands
+  useSubscriber('address', (message: IAddress) => setAddress(message));
+
+  const { changeUsedCash, changePayMethod } = useOrderCommands(setOrderData);
+
+  const { pay, payByRocket } = usePaymentCommands(paymentData);
 
   const openAddressWindow = () => {
     window.open(
@@ -48,7 +58,7 @@ export default function Ordersheet(props: IProps) {
         totalPrice={getOrderTotalPrice(orderItems || [])}
         coupayMoney={coupayMoney}
         coupangCash={coupangCash}
-        usedCash={orderData.usedCash}
+        orderData={orderData}
         onUsedCashChange={changeUsedCash}
         onPayMethodChange={changePayMethod}
       />

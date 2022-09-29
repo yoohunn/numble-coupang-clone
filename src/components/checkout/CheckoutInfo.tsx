@@ -1,25 +1,27 @@
-import type { ICartPrice, IPayData } from '../../types';
+import type { ICartPrice, IOrderData, TOnChangePayMethod } from '../../types';
 import { H2, Inline, RedSpan, Table } from './styles/checkout';
 import { Price } from '../global';
 import { Row, PayMethodContent, CashContent } from './index';
 
 interface IProps {
-  totalPrice: { product: number; shipping: number };
+  totalPrice: ICartPrice;
   coupayMoney: number;
   coupangCash: number;
-  usedCash: number;
+  orderData: IOrderData;
   onUsedCashChange: (cash: number) => void;
-  onPayMethodChange: (payData: IPayData) => void;
+  onPayMethodChange: TOnChangePayMethod;
 }
 
 export default function CheckoutInfo({
   totalPrice,
   coupayMoney,
   coupangCash,
-  usedCash,
+  orderData,
   onUsedCashChange,
   onPayMethodChange,
 }: IProps) {
+  const { usedCash } = orderData;
+
   return (
     <>
       <H2>결제정보</H2>
@@ -46,6 +48,7 @@ export default function CheckoutInfo({
           name='결제방법'
           content={
             <PayMethodContent
+              orderData={orderData}
               coupayMoney={coupayMoney}
               onPayMethodChange={onPayMethodChange}
             />
