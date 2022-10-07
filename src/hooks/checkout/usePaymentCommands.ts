@@ -17,7 +17,5 @@ export function usePaymentCommands(paymentData: IPaymentData) {
     alert('결제 성공');
   };
 
-  const payByRocket = () => {};
-
-  return { pay, payByRocket };
+  return { pay };
 }

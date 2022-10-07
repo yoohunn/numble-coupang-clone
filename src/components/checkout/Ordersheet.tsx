@@ -39,7 +39,7 @@ export default function Ordersheet({ id, ordersheet }: IProps) {
 
   const { changeUsedCash, changePayMethod } = useOrderCommands(setOrderData);
 
-  const { pay, payByRocket } = usePaymentCommands(paymentData);
+  const { pay } = usePaymentCommands(paymentData);
 
   const openAddressWindow = () => {
     window.open(
@@ -62,10 +62,7 @@ export default function Ordersheet({ id, ordersheet }: IProps) {
         onUsedCashChange={changeUsedCash}
         onPayMethodChange={changePayMethod}
       />
-      <PaymentButtons //
-        onPayment={pay}
-        onRocketPayment={payByRocket}
-      />
+      <PaymentButtons onPayment={pay} />
     </Section>
   );
 }

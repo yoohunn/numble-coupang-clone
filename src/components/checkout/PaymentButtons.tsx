@@ -2,10 +2,9 @@ import styled from '@emotion/styled';
 
 interface IProps {
   onPayment: () => void;
-  onRocketPayment: () => void;
 }
 
-const PaymentButtons = ({ onPayment, onRocketPayment }: IProps) => (
+const PaymentButtons = ({ onPayment }: IProps) => (
   <Box>
     <Button onClick={onPayment}>결제하기</Button>
   </Box>
