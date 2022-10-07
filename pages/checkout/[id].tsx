@@ -28,12 +28,10 @@ interface IProps {
 export default function CheckoutPage({ id, ordersheet }: IProps) {
   return (
     <AuthCheck>
-      <>
-        <CoupangHead title='COLOR OF YOUR DAYS!' />
+      <CoupangHead title='COLOR OF YOUR DAYS!' />
 
-        <LogoHeader />
-        <Ordersheet id={id} ordersheet={ordersheet} />
-      </>
+      <LogoHeader />
+      <Ordersheet id={id} ordersheet={ordersheet} />
     </AuthCheck>
   );
 }
