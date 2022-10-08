@@ -3,10 +3,8 @@ import type { IOrderData } from '../types/checkout.types';
 
 class CheckoutService extends PrivateService {
   async getOrdersheet(id: number, accessToken?: string) {
-    const bearerHeader = { Authorization: `Bearer ${accessToken}` };
-
     const { data } = await this.client.get('/ordersheet/' + id, {
-      headers: { ...bearerHeader },
+      headers: { ...this.setBearer(accessToken) },
     });
 
     return data;

@@ -7,7 +7,7 @@ class AuthService extends Service {
     if (!refreshToken) return;
 
     const { data } = await this.client.post('/auth/refresh', null, {
-      headers: this.bearHeader,
+      headers: this.setBearer(),
     });
 
     this.token.set(data);

@@ -6,7 +6,7 @@ class UserService extends Service {
     if (!accessToken) return;
 
     const { data } = await this.client.get('/users/me', {
-      headers: this.bearHeader,
+      headers: this.setBearer(),
     });
     return data;
   }
