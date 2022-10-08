@@ -1,8 +1,8 @@
 import type {
   IOrderData,
   TMobileCarrier,
-  TOnChangePayMethod,
   TPayMethod,
+  TUpdateOrderData,
 } from '../../types';
 import { Content, ContentSpan, CoupayStyles } from './styles/checkout';
 import { Price } from '../global';
@@ -11,26 +11,29 @@ import { Radio } from '../common';
 interface IProps {
   orderData: IOrderData;
   coupayMoney: number;
-  onPayMethodChange: TOnChangePayMethod;
+  onChange: TUpdateOrderData;
 }
 
 export default function PayMethodContent({
   orderData,
   coupayMoney,
-  onPayMethodChange,
+  onChange,
 }: IProps) {
-  const onChange = (payMethod: TPayMethod) =>
-    onPayMethodChange({ payMethod, mobileCarrier: '' });
+  const handleChange = (payMethod: TPayMethod) => {
+    onChange('payMethod', payMethod);
+    onChange('mobileCarrier', '');
+  };
 
-  const onSelect = (mobileCarrier: TMobileCarrier) =>
-    onPayMethodChange({ ...orderData, mobileCarrier });
+  const onSelect = (mobileCarrier: TMobileCarrier) => {
+    onChange('mobileCarrier', mobileCarrier);
+  };
 
   return (
     <>
       <form
         name='payType'
         onChange={(e) => {
-          onChange((e.target as HTMLInputElement).value as TPayMethod);
+          handleChange((e.target as HTMLInputElement).value as TPayMethod);
         }}
       >
         <Radio

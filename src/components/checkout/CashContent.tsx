@@ -11,17 +11,18 @@ import {
   MessageBox,
 } from './styles/checkout';
 import { Price } from '../global';
+import { TUpdateOrderData } from '../../types';
 
 interface IProps {
   usedCash: number;
   coupangCash: number;
-  onUsedCashChange: (usedCash: number) => void;
+  onChange: TUpdateOrderData;
 }
 
 export default function CashContent({
   usedCash,
   coupangCash,
-  onUsedCashChange,
+  onChange,
 }: IProps) {
   const [open, setOpen] = useState(false);
 
@@ -35,22 +36,17 @@ export default function CashContent({
       <Button pressed={open} onClick={() => setOpen((open) => !open)}>
         쿠팡캐시입력
       </Button>
-      {open && (
-        <CashForm
-          coupangCash={coupangCash}
-          onUsedCashChange={onUsedCashChange}
-        />
-      )}
+      {open && <CashForm coupangCash={coupangCash} onChange={onChange} />}
     </>
   );
 }
 
 interface ICashForm {
   coupangCash: number;
-  onUsedCashChange: (usedCash: number) => void;
+  onChange: TUpdateOrderData;
 }
 
-const CashForm = ({ coupangCash, onUsedCashChange }: ICashForm) => {
+const CashForm = ({ coupangCash, onChange }: ICashForm) => {
   const [value, setValue] = useState('');
 
   const isInvalid = +value > coupangCash;
@@ -67,7 +63,7 @@ const CashForm = ({ coupangCash, onUsedCashChange }: ICashForm) => {
     setValue(value);
   };
 
-  const onSubmit = () => onUsedCashChange(+value);
+  const onSubmit = () => onChange('usedCash', +value);
 
   return (
     <Form

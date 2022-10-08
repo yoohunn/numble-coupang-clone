@@ -1,12 +1,8 @@
 import { useState } from 'react';
 
-import {
-  useSubscriber,
-  useOrderCommands,
-  usePaymentCommands,
-} from '../../hooks';
+import { useSubscriber, usePay, useOrderData } from '../../hooks';
 
-import type { IAddress, IOrderData, IOrdersheet } from '../../types';
+import type { IAddress, IOrdersheet } from '../../types';
 import { getOrderTotalPrice } from '../../utils';
 import { H1, Section } from './styles/checkout';
 import { CheckoutInfo, BuyerInfo, AddressInfo, PaymentButtons } from './index';
@@ -19,27 +15,17 @@ interface IProps {
 export default function Ordersheet({ id, ordersheet }: IProps) {
   const { buyer, coupangCash, coupayMoney, orderItems } = ordersheet;
 
-  // Query
   const [address, setAddress] = useState<IAddress>(ordersheet.address);
 
-  const [orderData, setOrderData] = useState<IOrderData>({
-    usedCash: 0,
-    payMethod: 'coupaymoney',
-  });
-
-  const paymentData = {
+  const { orderData, update } = useOrderData();
+  const { pay } = usePay({
     ordersheetId: id,
     addressId: address.id,
     usedCoupaymoney: coupayMoney,
     ...orderData,
-  };
+  });
 
-  // Commands
   useSubscriber('address', (message: IAddress) => setAddress(message));
-
-  const { changeUsedCash, changePayMethod } = useOrderCommands(setOrderData);
-
-  const { pay } = usePaymentCommands(paymentData);
 
   const openAddressWindow = () => {
     window.open(
@@ -59,8 +45,7 @@ export default function Ordersheet({ id, ordersheet }: IProps) {
         coupayMoney={coupayMoney}
         coupangCash={coupangCash}
         orderData={orderData}
-        onUsedCashChange={changeUsedCash}
-        onPayMethodChange={changePayMethod}
+        onChange={update}
       />
       <PaymentButtons onPayment={pay} />
     </Section>

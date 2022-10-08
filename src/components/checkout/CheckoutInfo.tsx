@@ -1,4 +1,4 @@
-import type { ICartPrice, IOrderData, TOnChangePayMethod } from '../../types';
+import type { ICartPrice, IOrderData, TUpdateOrderData } from '../../types';
 import { H2, Inline, RedSpan, Table } from './styles/checkout';
 import { Price } from '../global';
 import { Row, PayMethodContent, CashContent } from './index';
@@ -8,8 +8,7 @@ interface IProps {
   coupayMoney: number;
   coupangCash: number;
   orderData: IOrderData;
-  onUsedCashChange: (cash: number) => void;
-  onPayMethodChange: TOnChangePayMethod;
+  onChange: TUpdateOrderData;
 }
 
 export default function CheckoutInfo({
@@ -17,8 +16,7 @@ export default function CheckoutInfo({
   coupayMoney,
   coupangCash,
   orderData,
-  onUsedCashChange,
-  onPayMethodChange,
+  onChange,
 }: IProps) {
   const { usedCash } = orderData;
 
@@ -35,7 +33,7 @@ export default function CheckoutInfo({
             <CashContent
               usedCash={usedCash}
               coupangCash={coupangCash}
-              onUsedCashChange={onUsedCashChange}
+              onChange={onChange}
             />
           }
         />
@@ -50,7 +48,7 @@ export default function CheckoutInfo({
             <PayMethodContent
               orderData={orderData}
               coupayMoney={coupayMoney}
-              onPayMethodChange={onPayMethodChange}
+              onChange={onChange}
             />
           }
         />

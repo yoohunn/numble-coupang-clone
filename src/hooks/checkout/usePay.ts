@@ -2,7 +2,7 @@ import type { IPaymentData } from '../../types';
 import { CheckoutService } from '../../services';
 
 /** 결제 요청 */
-export function usePaymentCommands(paymentData: IPaymentData) {
+export function usePay(paymentData: IPaymentData) {
   const pay = async () => {
     const isNoMobileOption =
       paymentData.payMethod === 'mobile' && paymentData.mobileCarrier === '';

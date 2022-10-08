@@ -72,3 +72,8 @@ export interface IPaymentData extends IOrderData {
 export type TOnChangePayMethod = (
   changed: Omit<IOrderData, 'usedCash'>
 ) => void;
+
+export type TUpdateOrderData = <Key extends keyof IOrderData>(
+  key: Key,
+  value: IOrderData[Key]
+) => void;
