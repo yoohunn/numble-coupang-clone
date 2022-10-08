@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import NextLink from 'next/link';
 
 import styles from '../styles/Home.module.css';
 
@@ -16,10 +17,17 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>Hello World!</h1>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/checkout/[id]</code>
-        </p>
+        <div className={styles.description}>
+          Click below 👇
+          <p className={styles.codes}>
+            <Link href='/checkout/1' />
+            <Link href='/cart' />
+            <Link href='/products' />
+            <Link href='/products/1' />
+            <Link href='/auth/signup' />
+            <Link href='/auth/login' />
+          </p>
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -39,3 +47,11 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+const Link = ({ href }: { href: string }) => (
+  <NextLink href={href}>
+    <a>
+      <code className={styles.code}>{href}</code>
+    </a>
+  </NextLink>
+);
