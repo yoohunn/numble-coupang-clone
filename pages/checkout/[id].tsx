@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const ordersheet = accessToken
     ? await CheckoutService.getOrdersheet(id, accessToken)
-    : [];
+    : null;
 
   return {
     props: { id, ordersheet },
