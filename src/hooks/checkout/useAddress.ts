@@ -2,7 +2,7 @@ import type { IAddress } from '../../types';
 import { CheckoutService } from '../../services';
 import { useQueryData } from '../useRequest';
 
-export function useAddressQuery() {
+export function useAddress() {
   const addresses = useQueryData<IAddress[]>(['address'], () =>
     CheckoutService.getAddress()
   );

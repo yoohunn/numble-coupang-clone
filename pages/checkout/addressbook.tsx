@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { useAddressQuery, useBroadcaster } from '../../src/hooks';
+import { useAddress, useAddressPopup } from '../../src/hooks';
 
 import type { IAddress } from '../../src/types';
 import { CoupangHead } from '../../src/components/global';
@@ -26,9 +26,9 @@ export default function Addressbook() {
     }
   }, [isReady]);
 
-  const { addresses } = useAddressQuery();
+  const { addresses } = useAddress();
 
-  const { postMessage } = useBroadcaster('address');
+  const { postMessage } = useAddressPopup();
 
   const changePickedId = (address: IAddress) => {
     setPickedId(address.id);
