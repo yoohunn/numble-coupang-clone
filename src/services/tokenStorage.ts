@@ -1,38 +1,29 @@
 import cookies from 'js-cookie';
 
-export interface ITokenStorage {
-  get: (
-    type?: 'access' | 'refresh'
-  ) =>
-    | string
-    | undefined
-    | { access: string | undefined; refresh: string | undefined };
-  set: (token: IToken) => void;
-  remove: () => void;
-}
-
-interface IToken {
+interface Token {
   access: string;
   refresh: string;
 }
 
-export const tokenStorage: ITokenStorage = {
-  get: (type?: 'access' | 'refresh') => {
-    const token = {
-      access: cookies.get('access'),
-      refresh: cookies.get('refresh'),
-    };
+type T = keyof Token;
 
-    return type ? token[type] : token;
-  },
+export class TokenStorage {
+  get(type?: T) {
+    return type
+      ? cookies.get(type)
+      : {
+          access: cookies.get('access'),
+          refresh: cookies.get('refresh'),
+        };
+  }
 
-  set: (token: IToken) => {
+  set(token: Token) {
     cookies.set('access', token.access, { expires: 1 });
     cookies.set('refresh', token.refresh, { expires: 7 });
-  },
+  }
 
-  remove: () => {
+  remove() {
     cookies.remove('access');
     cookies.remove('refresh');
-  },
-};
+  }
+}

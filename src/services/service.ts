@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-import { tokenStorage, ITokenStorage } from './tokenStorage';
+import { TokenStorage } from './tokenStorage';
 
+const tokenStorage = new TokenStorage();
 const baseURL = process.env.NEXT_PUBLIC_API_HOST;
 const bearHeader = {
   Authorization: `Bearer ${tokenStorage.get('access')}`,
@@ -16,7 +17,7 @@ const privateClient = axios.create({
 
 // Service module
 export default class Service {
-  protected token: ITokenStorage = tokenStorage;
+  protected token = tokenStorage;
   protected client: AxiosInstance = publicClient;
   protected bearHeader = bearHeader;
 }
