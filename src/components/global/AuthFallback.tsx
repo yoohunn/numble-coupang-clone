@@ -25,8 +25,8 @@ const AuthFallback = ({ message }: IProps) => {
 
   return (
     <LoginBox>
-      <span>{message}</span>
       <Button onClick={onClick}>로그인하기</Button>
+      <p>* 테스트용 계정으로 로그인됩니다.</p>
     </LoginBox>
   );
 };
@@ -34,7 +34,11 @@ const AuthFallback = ({ message }: IProps) => {
 export default AuthFallback;
 
 const LoginBox = styled.div`
-  & > span {
+  text-align: center;
+  padding: 4rem;
+
+  & p {
+    margin-top: 5px;
     line-height: 23px;
     font-size: 12px;
     color: #777881;
